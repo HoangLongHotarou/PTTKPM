@@ -10,3 +10,13 @@ F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\B
 F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
 F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.dll
 F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.pdb
+E:\CTK43_HocKy1_Nam04\PTTKPM\BusManagement\PTTKPM\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+E:\CTK43_HocKy1_Nam04\PTTKPM\BusManagement\PTTKPM\BusinessLayer\bin\Debug\BusinessLayer.dll
+E:\CTK43_HocKy1_Nam04\PTTKPM\BusManagement\PTTKPM\BusinessLayer\bin\Debug\BusinessLayer.pdb
+E:\CTK43_HocKy1_Nam04\PTTKPM\BusManagement\PTTKPM\BusinessLayer\bin\Debug\EntityFramework.dll
+E:\CTK43_HocKy1_Nam04\PTTKPM\BusManagement\PTTKPM\BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+E:\CTK43_HocKy1_Nam04\PTTKPM\BusManagement\PTTKPM\BusinessLayer\bin\Debug\EntityFramework.xml
+E:\CTK43_HocKy1_Nam04\PTTKPM\BusManagement\PTTKPM\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+E:\CTK43_HocKy1_Nam04\PTTKPM\BusManagement\PTTKPM\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
+E:\CTK43_HocKy1_Nam04\PTTKPM\BusManagement\PTTKPM\BusinessLayer\obj\Debug\BusinessLayer.dll
+E:\CTK43_HocKy1_Nam04\PTTKPM\BusManagement\PTTKPM\BusinessLayer\obj\Debug\BusinessLayer.pdb

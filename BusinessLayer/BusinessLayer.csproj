@@ -82,6 +82,8 @@
     <Compile Include="System\Functions\HRFunctions.cs" />
     <Compile Include="System\Objects\BusExt.cs" />
     <Compile Include="System\Objects\BusFuncs.cs" />
+    <Compile Include="System\Objects\BusTypeExt.cs" />
+    <Compile Include="System\Objects\BusTypeFuncs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -133,6 +133,9 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Pages\BusPage.aspx" />
+    <Content Include="Pages\BusTypePage.aspx">
+      <BrowseToURL>~/Pages/BusTypePage.aspx</BrowseToURL>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -200,6 +203,13 @@
     </Compile>
     <Compile Include="Pages\BusPage.aspx.designer.cs">
       <DependentUpon>BusPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BusTypePage.aspx.cs">
+      <DependentUpon>BusTypePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BusTypePage.aspx.designer.cs">
+      <DependentUpon>BusTypePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

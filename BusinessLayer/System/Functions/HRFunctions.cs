@@ -25,5 +25,33 @@ namespace BusinessLayer
             //Ghi loc, kiem tra quyen, kiem du lieu co hop le khong?
             return BusExt.Instance.Bus_Select_All();
         }
+
+        public List<BusType> SelectAllBusType()
+        {
+            //Ghi loc, kiem tra quyen, kiem du lieu co hop le khong?
+            return BusTypeExt.Instance.BusType_Select_All();
+        }
+
+        public int InsertUpdateBusType(int id, string name, string carMaker)
+        {
+            BusType busType;
+            busType = new BusType
+            {
+                BusTypeID = id,
+                Name = name,
+                CarMaker = carMaker
+            };            
+            return BusTypeExt.Instance.BusType_InsertUpdate(busType);
+        }        
+
+        public BusType SelectBusTypeByID(int id)
+        {
+            return BusTypeExt.Instance.BusType_Select_BusTypeID(id);
+        }
+
+        public void DeleteBusType(int id)
+        {
+            BusTypeExt.Instance.BusType_Delete(id);
+        }
     }
 }
