@@ -55,6 +55,7 @@
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                         <li><a runat="server" href="~/Pages/BusTypePage">Bus Type Page</a></li>
                         <li><a runat="server" href="~/Pages/BusPage">Bus Page</a></li>
+                        <li><a runat="server" href="~/Pages/SearchBusPage">Search Bus</a></li>
                     </ul>
                 </div>
             </div>

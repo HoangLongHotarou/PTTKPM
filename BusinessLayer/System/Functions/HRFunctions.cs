@@ -26,6 +26,10 @@ namespace BusinessLayer
             return BusExt.Instance.Bus_Select_All();
         }
 
+        public List<Bus> SearchBusByCriteria(string multiColumn)
+        {
+            return BusExt.Instance.Bus_Find_By_Criteria(multiColumn);
+        }
 
         public List<BusType> SelectAllBusType()
         {
