@@ -1,18 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BusPage.aspx.cs" Inherits="BusManagement.Pages.WebForm1" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-            Demo Bus
-            <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button_Click"/>
-            <asp:GridView ID="GridView1" runat="server"></asp:GridView>
-        </div>
-    </form>
-</body>
-</html>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="BusPage.aspx.cs" Inherits="BusManagement.Pages.WebForm1" %>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <div>
+        Demo Bus
+        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button_Click"/>
+        <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+    </div>
+</asp:Content>
