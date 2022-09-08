@@ -5,8 +5,8 @@
     <h2 style="text-align: center">Danh sách các loại xe buýt</h2>
     <hr />
     <center>
-        <asp:GridView ID="BusTypeAll" runat="server" Width="100%" BorderWidth="1px">
-            <HeaderStyle BackColor="#009933" BorderStyle="Solid" BorderWidth="1px" Font-Bold="True" Font-Size="16px" ForeColor="White" Height="30px" />
+        <asp:GridView ID="BusTypeAll" runat="server" Width="100%" BorderWidth="1px" HorizontalAlign="Center">
+            <HeaderStyle BackColor="#009933" BorderStyle="Solid" BorderWidth="1px" Font-Bold="True" Font-Size="16px" ForeColor="White" Height="30px" HorizontalAlign="Center" />
             <RowStyle BackColor="#F1F1F1" BorderStyle="Solid" BorderWidth="1px" HorizontalAlign="Center" VerticalAlign="Middle" />
         </asp:GridView>
     </center>

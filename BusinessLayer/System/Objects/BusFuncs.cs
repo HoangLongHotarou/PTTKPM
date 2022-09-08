@@ -26,150 +26,162 @@ namespace BusinessLayer
             }
         }
 
-		  public Bus Bus_Select_ID(int id)
-		  {
-				using (var db = GetContext())
-				{
-					 return db.Buses.FirstOrDefault(s => s.BusID == id);
-				}
-		  }
-		  public List<Bus> Bus_Select_IDs(List<string> IDs)
-		  {
-				using (var db = GetContext())
-				{
-					 var ls = db.Buses.AsQueryable();
-					 if (ls != null && ls.Any())
-					 {
-						  ls = ls.Where(s => IDs.Contains(s.BusID.ToString()));
-						  return ls.ToList();
-					 }
-					 return new List<Bus>();
-				}
-		  }
-		  public List<Bus> Bus_Select_By(string ColumnName, string Value)
-		  {
-				using (var db = GetContext())
-				{
-					 ColumnName = ColumnName.ToLower();
-					 Value = Value.ToLower();
-					 string sql = "Select * From Bus Where CONVERT(nvarchar," + ColumnName + ") = '" + Value + "'";
-					 var ls = db.Buses.SqlQuery(sql);
-					 if (ls != null && ls.Any()) return ls.ToList<Bus>();
-					 return new List<Bus>();
-				}
-		  }
-		  public List<Bus> Bus_Select_By(string ColumnName, string Value, int PageSize, int PageIndex, out int TotalRows)
-		  {
-				TotalRows = 0;
-				using (var db = GetContext())
-				{
-					 ColumnName = ColumnName.ToLower();
-					 Value = Value.ToLower();
-					 string sql = "Select * From Bus Where CONVERT(nvarchar," + ColumnName + ") = '" + Value + "'";
-					 var ls = db.Buses.SqlQuery(sql);
-					 if (ls != null && ls.Any())
-					 {
-						  TotalRows = ls.Count();
-						  return ls.OrderByDescending(s => s.BusID).Skip(PageSize * PageIndex).Take(PageSize).ToList<Bus>();
-					 }
-					 return new List<Bus>();
-				}
-		  }
-		  public int Bus_InsertUpdate(Bus obj)
-		  {
-				using (var db = GetContext())
-				{
-					 using (var db1 = GetContext())
-					 {
-						  var find = db.Buses.FirstOrDefault(s => s.BusID == obj.BusID);
-						  if (find != null) db1.Entry(obj).State = EntityState.Modified;
-						  else obj = db1.Buses.Add(obj);
-						  db1.SaveChanges();
-						  return obj.BusID;
-					 }
-				}
-		  }
-		  public void Bus_Delete(int id)
-		  {
-				using (var db = GetContext())
-				{
-					 var obj = db.Buses.FirstOrDefault(s => s.BusID == id);
-					 if (obj != null)
-					 {
-						  db.Buses.Remove(obj);
-						  db.SaveChanges();
-					 }
-				}
-		  }
-		  public void Bus_Delete_IDs(List<string> IDs)
-		  {
-				using (var db = GetContext())
-				{
-					 var ls = db.Buses.AsQueryable();
-					 if (ls != null && ls.Any())
-					 {
-						  ls = ls.Where(s => IDs.Contains(s.BusID.ToString()));
-						  foreach (var item in ls)
-								db.Buses.Remove(item);
-						  db.SaveChanges();
-					 }
-				}
-		  }
-		  public List<Bus> Bus_Find_KeyWord(string Keyword, int PageSize, int PageIndex, out int TotalRows)
-		  {
-				TotalRows = 0;
-				using (var db = GetContext())
-				{
-					 if (!string.IsNullOrWhiteSpace(Keyword))
-					 {
-						  var obj = db.Buses.FirstOrDefault(s => s.BusID.ToString().CompareTo(Keyword) == 0);
-						  if (obj != null)
-						  {
-								List<Bus> ls = new List<Bus>();
-								ls.Add(obj);
-								TotalRows = 1;
-								return ls;
-						  }
-						  var list = db.Buses.AsQueryable();
-						  list = list.Where(s => s.BusID.ToString().Contains(Keyword)
-						  || s.BusNumber.ToLower().Contains(Keyword)
-						  );
-						  if (list != null && list.Any())
-						  {
-								TotalRows = list.Count();
-								return list.OrderByDescending(s => s.BusID).Skip(PageSize * PageIndex).Take(PageSize).ToList();
-						  }
-					 }
-					 else
-					 {
-						  var list = db.Buses.AsQueryable();
-						  if (list != null && list.Any())
-						  {
-								TotalRows = list.Count();
-								return list.OrderByDescending(s => s.BusID).Skip(PageSize * PageIndex).Take(PageSize).ToList();
-						  }
-					 }
-					 return new List<Bus>();
-				}
-		  }
-		  public void Bus_Import(List<Bus> list)
-		  {
-				using (var db = GetContext())
-				{
-					 using (DbContextTransaction transaction = db.Database.BeginTransaction())
-					 {
-						  try
-						  {
-								db.Buses.AddRange(list);
-								db.SaveChanges();
-								transaction.Commit();
-						  }
-						  catch
-						  {
-								transaction.Rollback();
-						  }
-					 }
-				}
-		  }
-	 }
+        public Bus Bus_Select_ID(int id)
+        {
+            using (var db = GetContext())
+            {
+                return db.Buses.FirstOrDefault(s => s.BusID == id);
+            }
+        }
+        public List<Bus> Bus_Select_IDs(List<string> IDs)
+        {
+            using (var db = GetContext())
+            {
+                var ls = db.Buses.AsQueryable();
+                if (ls != null && ls.Any())
+                {
+                    ls = ls.Where(s => IDs.Contains(s.BusID.ToString()));
+                    return ls.ToList();
+                }
+                return new List<Bus>();
+            }
+        }
+        public List<Bus> Bus_Select_By(string ColumnName, string Value)
+        {
+            using (var db = GetContext())
+            {
+                ColumnName = ColumnName.ToLower();
+                Value = Value.ToLower();
+                string sql = "Select * From Bus Where CONVERT(nvarchar," + ColumnName + ") = '" + Value + "'";
+                var ls = db.Buses.SqlQuery(sql);
+                if (ls != null && ls.Any()) return ls.ToList<Bus>();
+                return new List<Bus>();
+            }
+        }
+        public List<Bus> Bus_Select_By(string ColumnName, string Value, int PageSize, int PageIndex, out int TotalRows)
+        {
+            TotalRows = 0;
+            using (var db = GetContext())
+            {
+                ColumnName = ColumnName.ToLower();
+                Value = Value.ToLower();
+                string sql = "Select * From Bus Where CONVERT(nvarchar," + ColumnName + ") = '" + Value + "'";
+                var ls = db.Buses.SqlQuery(sql);
+                if (ls != null && ls.Any())
+                {
+                    TotalRows = ls.Count();
+                    return ls.OrderByDescending(s => s.BusID).Skip(PageSize * PageIndex).Take(PageSize).ToList<Bus>();
+                }
+                return new List<Bus>();
+            }
+        }
+        public int Bus_InsertUpdate(Bus obj)
+        {
+            using (var db = GetContext())
+            {
+                using (var db1 = GetContext())
+                {
+                    var find = db.Buses.FirstOrDefault(s => s.BusID == obj.BusID);
+                    if (find != null) db1.Entry(obj).State = EntityState.Modified;
+                    else obj = db1.Buses.Add(obj);
+                    db1.SaveChanges();
+                    return obj.BusID;
+                }
+            }
+        }
+        public void Bus_Delete(int id)
+        {
+            using (var db = GetContext())
+            {
+                var obj = db.Buses.FirstOrDefault(s => s.BusID == id);
+                if (obj != null)
+                {
+                    db.Buses.Remove(obj);
+                    db.SaveChanges();
+                }
+            }
+        }
+        public void Bus_Delete_IDs(List<string> IDs)
+        {
+            using (var db = GetContext())
+            {
+                var ls = db.Buses.AsQueryable();
+                if (ls != null && ls.Any())
+                {
+                    ls = ls.Where(s => IDs.Contains(s.BusID.ToString()));
+                    foreach (var item in ls)
+                        db.Buses.Remove(item);
+                    db.SaveChanges();
+                }
+            }
+        }
+        public List<Bus> Bus_Find_KeyWord(string Keyword, int PageSize, int PageIndex, out int TotalRows)
+        {
+            TotalRows = 0;
+            using (var db = GetContext())
+            {
+                if (!string.IsNullOrWhiteSpace(Keyword))
+                {
+                    var obj = db.Buses.FirstOrDefault(s => s.BusID.ToString().CompareTo(Keyword) == 0);
+                    if (obj != null)
+                    {
+                        List<Bus> ls = new List<Bus>();
+                        ls.Add(obj);
+                        TotalRows = 1;
+                        return ls;
+                    }
+                    var list = db.Buses.AsQueryable();
+                    list = list.Where(s => s.BusID.ToString().Contains(Keyword)
+                    || s.BusNumber.ToLower().Contains(Keyword)
+                    );
+                    if (list != null && list.Any())
+                    {
+                        TotalRows = list.Count();
+                        return list.OrderByDescending(s => s.BusID).Skip(PageSize * PageIndex).Take(PageSize).ToList();
+                    }
+                }
+                else
+                {
+                    var list = db.Buses.AsQueryable();
+                    if (list != null && list.Any())
+                    {
+                        TotalRows = list.Count();
+                        return list.OrderByDescending(s => s.BusID).Skip(PageSize * PageIndex).Take(PageSize).ToList();
+                    }
+                }
+                return new List<Bus>();
+            }
+        }
+        public void Bus_Import(List<Bus> list)
+        {
+            using (var db = GetContext())
+            {
+                using (DbContextTransaction transaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        db.Buses.AddRange(list);
+                        db.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        public List<Bus> Bus_Find_By_Criteria(string MultiColumn)
+        {
+            using (var context = GetContext())
+            {
+                MultiColumn = MultiColumn.ToLower();
+                string sql = $"Select * From Bus Where {MultiColumn}";
+                var ls = context.Buses.SqlQuery(sql);
+                if (ls != null && ls.Any()) return ls.ToList<Bus>();
+                return new List<Bus>();
+            }
+        }
+    }
 }
