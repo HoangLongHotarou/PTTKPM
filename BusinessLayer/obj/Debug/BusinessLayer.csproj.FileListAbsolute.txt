@@ -1,0 +1,12 @@
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\bin\Debug\BusinessLayer.dll
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\bin\Debug\BusinessLayer.pdb
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\bin\Debug\EntityFramework.dll
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\bin\Debug\EntityFramework.xml
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.dll
+F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.pdb

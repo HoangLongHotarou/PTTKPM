@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ROUTE_MANAGEMENTModelStoreContainer" CdmEntityContainer="ROUTE_MANAGEMENTEntities">
+    <EntitySetMapping Name="Buses">
+      <EntityTypeMapping TypeName="ROUTE_MANAGEMENTModel.Bus">
+        <MappingFragment StoreEntitySet="Bus">
+          <ScalarProperty Name="BusID" ColumnName="BusID" />
+          <ScalarProperty Name="LicensePlates" ColumnName="LicensePlates" />
+          <ScalarProperty Name="BusNumber" ColumnName="BusNumber" />
+          <ScalarProperty Name="SumSeats" ColumnName="SumSeats" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="BusTypeID" ColumnName="BusTypeID" />
+          <ScalarProperty Name="RoutesID" ColumnName="RoutesID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BusTypes">
+      <EntityTypeMapping TypeName="ROUTE_MANAGEMENTModel.BusType">
+        <MappingFragment StoreEntitySet="BusType">
+          <ScalarProperty Name="BusTypeID" ColumnName="BusTypeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CarMaker" ColumnName="CarMaker" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Driver_Bus">
+      <EntityTypeMapping TypeName="ROUTE_MANAGEMENTModel.Driver_Bus">
+        <MappingFragment StoreEntitySet="Driver_Bus">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+          <ScalarProperty Name="BusID" ColumnName="BusID" />
+          <ScalarProperty Name="DepartureDay" ColumnName="DepartureDay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

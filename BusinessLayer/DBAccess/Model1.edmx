@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ROUTE_MANAGEMENTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="BusID" />
+          </Key>
+          <Property Name="BusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LicensePlates" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="BusNumber" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="SumSeats" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="BusTypeID" Type="int" Nullable="false" />
+          <Property Name="RoutesID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusType">
+          <Key>
+            <PropertyRef Name="BusTypeID" />
+          </Key>
+          <Property Name="BusTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CarMaker" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver_Bus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DriverID" Type="int" Nullable="false" />
+          <Property Name="BusID" Type="int" Nullable="false" />
+          <Property Name="DepartureDay" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="ROUTE_MANAGEMENTModelStoreContainer">
+          <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusType" EntityType="Self.BusType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver_Bus" EntityType="Self.Driver_Bus" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ROUTE_MANAGEMENTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="BusID" />
+          </Key>
+          <Property Name="BusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LicensePlates" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BusNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SumSeats" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BusTypeID" Type="Int32" Nullable="false" />
+          <Property Name="RoutesID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusType">
+          <Key>
+            <PropertyRef Name="BusTypeID" />
+          </Key>
+          <Property Name="BusTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CarMaker" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver_Bus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DriverID" Type="Int32" Nullable="false" />
+          <Property Name="BusID" Type="Int32" Nullable="false" />
+          <Property Name="DepartureDay" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="ROUTE_MANAGEMENTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Buses" EntityType="Self.Bus" />
+          <EntitySet Name="BusTypes" EntityType="Self.BusType" />
+          <EntitySet Name="Driver_Bus" EntityType="Self.Driver_Bus" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ROUTE_MANAGEMENTModelStoreContainer" CdmEntityContainer="ROUTE_MANAGEMENTEntities">
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="ROUTE_MANAGEMENTModel.Bus">
+              <MappingFragment StoreEntitySet="Bus">
+                <ScalarProperty Name="BusID" ColumnName="BusID" />
+                <ScalarProperty Name="LicensePlates" ColumnName="LicensePlates" />
+                <ScalarProperty Name="BusNumber" ColumnName="BusNumber" />
+                <ScalarProperty Name="SumSeats" ColumnName="SumSeats" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BusTypeID" ColumnName="BusTypeID" />
+                <ScalarProperty Name="RoutesID" ColumnName="RoutesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusTypes">
+            <EntityTypeMapping TypeName="ROUTE_MANAGEMENTModel.BusType">
+              <MappingFragment StoreEntitySet="BusType">
+                <ScalarProperty Name="BusTypeID" ColumnName="BusTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CarMaker" ColumnName="CarMaker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Driver_Bus">
+            <EntityTypeMapping TypeName="ROUTE_MANAGEMENTModel.Driver_Bus">
+              <MappingFragment StoreEntitySet="Driver_Bus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="BusID" ColumnName="BusID" />
+                <ScalarProperty Name="DepartureDay" ColumnName="DepartureDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
