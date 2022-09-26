@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.DBAccess;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,6 +13,7 @@ namespace BusManagement.Pages
     public partial class SearchBusPage : System.Web.UI.Page
     {
         List<int> list = new List<int> { 1, 2, 3, 4, 5 };
+        public List<Bus> listResult;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -47,14 +49,12 @@ namespace BusManagement.Pages
             Debug.WriteLine(multiQuery);
             if (multiQuery == "")
             {
-                this.GridView1.DataSource = HRFunctions.Instance.SelectAllBus();
-                this.GridView1.DataBind();
+                listResult = HRFunctions.Instance.SelectAllBus();
                 return;
             }
             int lastPs = multiQuery.LastIndexOf("and");
             multiQuery = multiQuery.Substring(0, lastPs);
-            this.GridView1.DataSource = HRFunctions.Instance.SearchBusByCriteria(multiQuery);
-            this.GridView1.DataBind();
+            listResult = HRFunctions.Instance.SearchBusByCriteria(multiQuery);
         }
     }
 }

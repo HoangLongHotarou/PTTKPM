@@ -11,6 +11,7 @@ namespace BusManagement
 {
     public class Global : HttpApplication
     {
+        public static int g_PageSize = 2;
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
