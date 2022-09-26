@@ -79,5 +79,10 @@ namespace BusinessLayer
         {
             BusExt.Instance.Bus_Delete(id);
         }
+
+        public List<Bus> Bus_Pagination(int PageSize, int PageIndex, out int TotalRows)
+        {
+            return BusExt.Instance.Bus_Pagination(PageSize, PageIndex, out TotalRows);
+        }
     }
 }

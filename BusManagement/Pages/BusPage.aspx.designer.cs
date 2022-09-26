@@ -7,31 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BusManagement.Pages
-{
-
-
-    public partial class WebForm1
-    {
-
+namespace BusManagement.Pages {
+    
+    
+    public partial class WebForm1 {
+        
         /// <summary>
-        /// GridView1 control.
+        /// BusID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
-
-        /// <summary>
-        /// BusList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList BusList;
-
+        protected global::System.Web.UI.HtmlControls.HtmlInputText BusID;
+        
         /// <summary>
         /// BienSoXe control.
         /// </summary>
@@ -39,8 +28,8 @@ namespace BusManagement.Pages
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox BienSoXe;
-
+        protected global::System.Web.UI.HtmlControls.HtmlInputText BienSoXe;
+        
         /// <summary>
         /// SoXe control.
         /// </summary>
@@ -48,8 +37,8 @@ namespace BusManagement.Pages
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SoXe;
-
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl SoXe;
+        
         /// <summary>
         /// SoChoNgoi control.
         /// </summary>
@@ -57,8 +46,8 @@ namespace BusManagement.Pages
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SoChoNgoi;
-
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl SoChoNgoi;
+        
         /// <summary>
         /// TrangThai control.
         /// </summary>
@@ -66,8 +55,8 @@ namespace BusManagement.Pages
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TrangThai;
-
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TrangThai;
+        
         /// <summary>
         /// bustypelist control.
         /// </summary>
@@ -76,7 +65,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList bustypelist;
-
+        
         /// <summary>
         /// tuyenlist control.
         /// </summary>
@@ -85,7 +74,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList tuyenlist;
-
+        
         /// <summary>
         /// AddBusButton control.
         /// </summary>
@@ -94,7 +83,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button AddBusButton;
-
+        
         /// <summary>
         /// UpdateBusButton control.
         /// </summary>
@@ -103,7 +92,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button UpdateBusButton;
-
+        
         /// <summary>
         /// DeleteBusButton control.
         /// </summary>
@@ -112,5 +101,77 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button DeleteBusButton;
+        
+        /// <summary>
+        /// pnPhanTrang control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnPhanTrang;
+        
+        /// <summary>
+        /// btTruoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btTruoc;
+        
+        /// <summary>
+        /// hPageIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hPageIndex;
+        
+        /// <summary>
+        /// hTotalRows control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hTotalRows;
+        
+        /// <summary>
+        /// hPageSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hPageSize;
+        
+        /// <summary>
+        /// pnButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnButton;
+        
+        /// <summary>
+        /// btSau control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btSau;
+        
+        /// <summary>
+        /// TestLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TestLabel;
     }
 }

@@ -11,6 +11,7 @@ namespace BusManagement.Pages
 {
     public partial class BusTypePage : System.Web.UI.Page
     {
+        public List<BusType> BustypeList;
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadListBusType();
@@ -49,8 +50,7 @@ namespace BusManagement.Pages
 
         private void LoadListBusType()
         {
-            this.BusTypeAll.DataSource = HRFunctions.Instance.SelectAllBusType();
-            this.BusTypeAll.DataBind();
+            BustypeList = HRFunctions.Instance.SelectAllBusType();
         }
 
         protected void Update_Click(object sender, EventArgs e)

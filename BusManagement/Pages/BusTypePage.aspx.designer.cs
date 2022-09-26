@@ -7,22 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BusManagement.Pages
-{
-
-
-    public partial class BusTypePage
-    {
-
-        /// <summary>
-        /// BusTypeAll control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView BusTypeAll;
-
+namespace BusManagement.Pages {
+    
+    
+    public partial class BusTypePage {
+        
         /// <summary>
         /// Label1 control.
         /// </summary>
@@ -31,7 +20,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-
+        
         /// <summary>
         /// DropDownListIDLoaiXe control.
         /// </summary>
@@ -40,7 +29,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownListIDLoaiXe;
-
+        
         /// <summary>
         /// Label2 control.
         /// </summary>
@@ -49,7 +38,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-
+        
         /// <summary>
         /// TenLoai control.
         /// </summary>
@@ -58,7 +47,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TenLoai;
-
+        
         /// <summary>
         /// Label3 control.
         /// </summary>
@@ -67,7 +56,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
-
+        
         /// <summary>
         /// HangXe control.
         /// </summary>
@@ -76,7 +65,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox HangXe;
-
+        
         /// <summary>
         /// Insert control.
         /// </summary>
@@ -85,7 +74,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Insert;
-
+        
         /// <summary>
         /// Update control.
         /// </summary>
@@ -94,7 +83,7 @@ namespace BusManagement.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Update;
-
+        
         /// <summary>
         /// Delete control.
         /// </summary>

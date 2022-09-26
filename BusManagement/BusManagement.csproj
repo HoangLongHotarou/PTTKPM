@@ -119,6 +119,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -139,6 +140,7 @@
     <Content Include="Pages\SearchBusPage.aspx">
       <BrowseToURL>~/Pages/SearchBusPage.aspx</BrowseToURL>
     </Content>
+    <Content Include="Pages\Test.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -220,6 +222,13 @@
     </Compile>
     <Compile Include="Pages\SearchBusPage.aspx.designer.cs">
       <DependentUpon>SearchBusPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
