@@ -33,6 +33,7 @@ namespace BusinessLayer
                 return db.Buses.FirstOrDefault(s => s.BusID == id);
             }
         }
+
         public List<Bus> Bus_Select_IDs(List<string> IDs)
         {
             using (var db = GetContext())

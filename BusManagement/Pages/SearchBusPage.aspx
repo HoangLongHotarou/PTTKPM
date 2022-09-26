@@ -26,7 +26,7 @@
         <asp:DropDownList ID="RoutesList" runat="server" AutoPostBack="True"></asp:DropDownList>
     </div>
     <div style="margin: 20px">
-        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Search"/>
+        <asp:Button ID="Button1" runat="server" Text="Tìm kiếm" OnClick="Search"/>
     </div>
     <asp:GridView ID="GridView1" runat="server" HorizontalAlign="Center">
     </asp:GridView>
