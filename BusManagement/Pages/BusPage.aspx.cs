@@ -14,7 +14,7 @@ namespace BusManagement.Pages
     {
         List<int> list = new List<int> { 1, 2, 3, 4, 5 };
         int PageSize = Global.g_PageSize;
-        public int pivot=0;
+        public int pivot = 0;
         //int PageSize = 2;
 
         public List<Bus> listBus;
@@ -32,22 +32,42 @@ namespace BusManagement.Pages
 
         protected void AddBusButton_Click(object sender, EventArgs e)
         {
-            Bus bus = new Bus
+            if (!CheckNull())
             {
-                LicensePlates = this.BienSoXe.Value,
-                BusNumber = this.SoXe.Value,
-                SumSeats = int.Parse(this.SoChoNgoi.Value),
-                Status = this.TrangThai.Value,
-                BusTypeID = int.Parse(this.bustypelist.Text),
-                RoutesID = int.Parse(this.tuyenlist.Text),
-            };
-
-            HRFunctions.Instance.AddBus(bus);
-            ClearInput();
+                //ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "swal('Warning!','Bạn không được để trống !!!','warning')", true);
+                //Response.Write("<script>alert('Bạn không được để trống các ô')</script>");
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Bạn không được để trống các ô')", true);
+                ShowAlert("swal('Warning!','Bạn không được để trống các ô !!!','warning')");
+            }
+            else
+            {
+                Bus bus = new Bus
+                {
+                    LicensePlates = this.BienSoXe.Value,
+                    BusNumber = this.SoXe.Value,
+                    SumSeats = int.Parse(this.SoChoNgoi.Value),
+                    Status = this.TrangThai.Value,
+                    BusTypeID = int.Parse(this.bustypelist.Text),
+                    RoutesID = int.Parse(this.tuyenlist.Text),
+                };
+                HRFunctions.Instance.AddBus(bus);
+                ShowAlert("swal('Success!','Thêm xe thành công!','success')");
+                ClearInput();
+            }
             LoadListBusPage(0);
             LoadDropDownList();
             LoadPhanTrang();
-            ClearInput();
+        }
+
+
+        protected bool CheckNull()
+        {
+            if (string.IsNullOrWhiteSpace(this.BienSoXe.Value) || string.IsNullOrWhiteSpace(this.SoXe.Value) ||
+                string.IsNullOrWhiteSpace(this.SoChoNgoi.Value) || string.IsNullOrWhiteSpace(this.TrangThai.Value))
+            {
+                return false;
+            }
+            return true;
         }
 
         protected void ClearInput()
@@ -86,26 +106,46 @@ namespace BusManagement.Pages
 
         protected void UpdateBusButton_Click(object sender, EventArgs e)
         {
-            Bus bus = HRFunctions.Instance.FindBusByID(int.Parse(this.BusID.Value));
+            if (!CheckNull())
+            {
+                ShowAlert("swal('Warning!','Bạn không được để trống các ô !!!','warning')");
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(this.BusID.Value))
+                {
+                    ShowAlert("swal('Warning!','Chưa chọn xe để cập nhật!!!','warning')");
+                }
+                else
+                {
+                    Bus bus = HRFunctions.Instance.FindBusByID(int.Parse(this.BusID.Value));
 
-            bus.LicensePlates = this.BienSoXe.Value;
-            bus.BusNumber = this.SoXe.Value;
-            bus.SumSeats = int.Parse(this.SoChoNgoi.Value);
-            bus.Status = this.TrangThai.Value;
-            bus.BusTypeID = int.Parse(this.bustypelist.Text);
-            bus.RoutesID = int.Parse(this.tuyenlist.Text);
+                    bus.LicensePlates = this.BienSoXe.Value;
+                    bus.BusNumber = this.SoXe.Value;
+                    bus.SumSeats = int.Parse(this.SoChoNgoi.Value);
+                    bus.Status = this.TrangThai.Value;
+                    bus.BusTypeID = int.Parse(this.bustypelist.Text);
+                    bus.RoutesID = int.Parse(this.tuyenlist.Text);
 
-            HRFunctions.Instance.AddBus(bus);
-            pivot = int.Parse(Request.QueryString["page"]);
+                    HRFunctions.Instance.AddBus(bus);
+                    ShowAlert("swal('Success!','Cập nhật xe thành công!','success')");
 
-            //Them do
-            PropertyInfo isreadonly = typeof(System.Collections.Specialized.NameValueCollection).GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
-            isreadonly.SetValue(this.Request.QueryString, false, null);
+                    pivot = int.Parse(Request.QueryString["page"]);
 
-            Request.QueryString.Clear();
+                    //Them do
+                    PropertyInfo isreadonly = typeof(System.Collections.Specialized.NameValueCollection).GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
+                    isreadonly.SetValue(this.Request.QueryString, false, null);
+                    Request.QueryString.Clear();
+                }
+            }
             LoadListBusPage(pivot);
             LoadDropDownList();
             ClearInput();
+        }
+
+        private void ShowAlert(string note)
+        {
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", note, true);
         }
 
         protected void LoadDropDownList()
@@ -187,6 +227,21 @@ namespace BusManagement.Pages
             {
                 this.pnPhanTrang.Visible = false;
             }
+        }
+
+        protected void DeleteBusButton_CLick(object sender, EventArgs e)
+        {
+            string selected = Request.Form["cbID"];
+            if (selected != null && selected.Trim().Length > 0)
+            {
+                List<string> list = selected.Split(',').ToList();
+                HRFunctions.Instance.DeleteBusByIDs(list);
+                ShowAlert("swal('Success!','Xóa xe thành công!','success')");
+            }
+            LoadListBusPage(0);
+            LoadDropDownList();
+            LoadPhanTrang();
+            ClearInput();
         }
     }
 }

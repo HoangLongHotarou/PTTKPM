@@ -94,5 +94,9 @@ namespace BusinessLayer
         {
             return BusExt.Instance.Get_Total_Rows();
         }
+        public void DeleteBusByIDs(List<string> list)
+        {
+            BusExt.Instance.Bus_Delete_IDs(list);
+        }
     }
 }

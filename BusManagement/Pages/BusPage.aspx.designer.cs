@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BusManagement.Pages {
-    
-    
-    public partial class WebForm1 {
-        
+namespace BusManagement.Pages
+{
+
+
+    public partial class WebForm1
+    {
+
         /// <summary>
         /// BusID control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText BusID;
-        
+
         /// <summary>
         /// BienSoXe control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText BienSoXe;
-        
+
         /// <summary>
         /// SoXe control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl SoXe;
-        
+
         /// <summary>
         /// SoChoNgoi control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl SoChoNgoi;
-        
+
         /// <summary>
         /// TrangThai control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText TrangThai;
-        
+
         /// <summary>
         /// bustypelist control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList bustypelist;
-        
+
         /// <summary>
         /// tuyenlist control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList tuyenlist;
-        
+
         /// <summary>
         /// AddBusButton control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button AddBusButton;
-        
+
         /// <summary>
         /// UpdateBusButton control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button UpdateBusButton;
-        
+
         /// <summary>
         /// DeleteBusButton control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button DeleteBusButton;
-        
+
         /// <summary>
         /// pnPhanTrang control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnPhanTrang;
-        
+
         /// <summary>
         /// btTruoc control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btTruoc;
-        
+
         /// <summary>
         /// hPageIndex control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hPageIndex;
-        
+
         /// <summary>
         /// hTotalRows control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hTotalRows;
-        
+
         /// <summary>
         /// hPageSize control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hPageSize;
-        
+
         /// <summary>
         /// pnButton control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnButton;
-        
+
         /// <summary>
         /// btSau control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace BusManagement.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btSau;
-        
+
         /// <summary>
         /// TestLabel control.
         /// </summary>
