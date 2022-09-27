@@ -44,4 +44,22 @@
             <% } %>
         </tbody>
     </table>    
+    <div class="card-footer text-right">
+        <asp:Panel ID="pnPhanTrang" runat="server">
+            <div class="form-row">
+                <div class="col-auto">
+                    <asp:Button ID="btTruoc" runat="server" Text="Trước" class="btn btn-dark" OnClick="btPhanTrang_Click" />
+                </div>
+                <div class="col-auto">
+                    <asp:HiddenField ID="hPageIndex" runat="server" />
+                    <asp:HiddenField ID="hTotalRows" runat="server" />
+                    <asp:HiddenField ID="hPageSize" runat="server" />
+                    <asp:Panel ID="pnButton" runat="server"></asp:Panel>
+                </div>
+                <div class="col-auto">
+                    <asp:Button ID="btSau" runat="server" Text="Sau" class="btn  btn-dark" OnClick="btPhanTrang_Click" />
+                </div>
+            </div>
+        </asp:Panel>
+    </div>
 </asp:Content>

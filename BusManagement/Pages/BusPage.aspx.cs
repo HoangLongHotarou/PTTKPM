@@ -3,6 +3,7 @@ using BusinessLayer.DBAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,23 +14,20 @@ namespace BusManagement.Pages
     {
         List<int> list = new List<int> { 1, 2, 3, 4, 5 };
         int PageSize = Global.g_PageSize;
+        public int pivot=0;
+        //int PageSize = 2;
+
         public List<Bus> listBus;
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
             if (!IsPostBack)
             {
-                //this.hPageIndex.Value = "0";
+                this.hPageIndex.Value = "0";
                 LoadDropDownList();
+                LoadListBusPage(0);
                 LoadEditButton();
-                LoadList();        
             }
-            //LoadPhanTrang();
-        }
-
-        private void LoadList()
-        {
-            listBus = HRFunctions.Instance.SelectAllBus();
-            //this.hTotalRows.Value = listBus.Count.ToString();
+            this.LoadPhanTrang();
         }
 
         protected void AddBusButton_Click(object sender, EventArgs e)
@@ -46,11 +44,9 @@ namespace BusManagement.Pages
 
             HRFunctions.Instance.AddBus(bus);
             ClearInput();
-            //int TotalRows = int.Parse(this.hTotalRows.Value);
-            //int count = TotalRows / PageSize;
-            LoadList();
-            //LoadListBusPage(count);
+            LoadListBusPage(0);
             LoadDropDownList();
+            LoadPhanTrang();
             ClearInput();
         }
 
@@ -81,29 +77,12 @@ namespace BusManagement.Pages
 
                     this.bustypelist.SelectedValue = busType.BusTypeID.ToString();
                     this.tuyenlist.Text = bus.RoutesID.ToString();
+                    pivot = int.Parse(Request.QueryString["page"]);
+                    LoadListBusPage(pivot);
                 }
             }
             catch { }
-
         }
-
-        //protected void BusList_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    int busID = 0;
-        //    bool check = int.TryParse(this.BusList.Text, out busID);
-        //    if (check == false) return;
-        //    Bus bus = HRFunctions.Instance.FindBusByID(busID);
-
-        //    this.BienSoXe.Text = bus.LicensePlates;
-        //    this.SoXe.Text = bus.BusNumber;
-        //    this.SoChoNgoi.Text = bus.SumSeats.ToString();
-        //    this.TrangThai.Text = bus.Status;
-
-        //    BusType busType = HRFunctions.Instance.FindBusTypeByID(bus.BusTypeID);
-
-        //    this.bustypelist.SelectedValue = busType.BusTypeID.ToString();
-        //    this.tuyenlist.Text = bus.RoutesID.ToString();
-        //}
 
         protected void UpdateBusButton_Click(object sender, EventArgs e)
         {
@@ -117,8 +96,14 @@ namespace BusManagement.Pages
             bus.RoutesID = int.Parse(this.tuyenlist.Text);
 
             HRFunctions.Instance.AddBus(bus);
-            LoadList();
-            //LoadListBusPage(int.Parse(this.hPageIndex.Value));
+            pivot = int.Parse(Request.QueryString["page"]);
+
+            //Them do
+            PropertyInfo isreadonly = typeof(System.Collections.Specialized.NameValueCollection).GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
+            isreadonly.SetValue(this.Request.QueryString, false, null);
+
+            Request.QueryString.Clear();
+            LoadListBusPage(pivot);
             LoadDropDownList();
             ClearInput();
         }
@@ -140,74 +125,68 @@ namespace BusManagement.Pages
             //this.BusList.Items.Insert(0, "ID xe");
         }
 
-        //protected void DeleteBusButton_CLick(object sender, EventArgs e)
-        //{
-        //    HRFunctions.Instance.DeleteBusByID(int.Parse(this.BusList.Text));
-        //    LoadList();
-        //    LoadDropDownList();
-        //    ClearInput();
-        //}
+        private void LoadPhanTrang()
+        {
+            try
+            {
+                int TotalRows = int.Parse(this.hTotalRows.Value);
+                int count = TotalRows / PageSize;
+                if (TotalRows % PageSize > 0)
+                    count++;
+                if (count > 20)
+                    count = 20;
+                this.pnButton.Controls.Clear();
+                for (int i = 0; i < count; i++)
+                {
+                    Button bt = new Button()
+                    {
+                        ID = "bt" + i,
+                        Text = (i + 1).ToString()
+                    };
+                    bt.Attributes.Add("runat", "server");
+                    bt.Click += new EventHandler(this.btPhanTrang_Click);
+                    bt.CssClass = "btn btn-dark";
+                    this.pnButton.Controls.Add(bt);
+                }
 
-        //private void LoadPhanTrang()
-        //{
-        //    try
-        //    {
-        //        int TotalRows = int.Parse(this.hTotalRows.Value);                
-        //        int count = TotalRows / PageSize;
-        //        if (TotalRows % PageSize > 0)
-        //            count++;
-        //        if (count > 20)
-        //            count = 20;
-        //        this.pnButton.Controls.Clear();
-        //        for (int i = 0; i < count; i++)
-        //        {
-        //            Button bt = new Button()
-        //            {
-        //                ID = "bt" + i,
-        //                Text = (i + 1).ToString()
-        //            };
-        //            bt.Attributes.Add("runat", "server");
-        //            bt.Click += new EventHandler(this.btPhanTrang_Click);
-        //            bt.CssClass = "btn btn-dark";
-        //            this.pnButton.Controls.Add(bt);                
-        //        }
+            }
+            catch { }
+        }
 
-        //    }
-        //    catch { }
-        //}
+        public void btPhanTrang_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int PageIndex = int.Parse(this.hPageIndex.Value);
+            switch (btn.ID)
+            {
+                case "btTruoc":
+                    PageIndex = int.Parse(this.hPageIndex.Value);
+                    PageIndex = (PageIndex > 0) ? PageIndex - 1 : 0;
+                    this.hPageIndex.Value = PageIndex.ToString();
+                    break;
+                case "btSau":
+                    int TotalRows = int.Parse(hTotalRows.Value);
+                    PageIndex = ((PageIndex + 1) * PageSize < TotalRows) ? PageIndex + 1 : PageIndex;
+                    break;
+                default:
+                    PageIndex = int.Parse(btn.Text) - 1;
+                    break;
+            }
+            this.hPageIndex.Value = PageIndex.ToString();
+            this.TestLabel.Text = this.hPageIndex.Value.ToString();
+            pivot = PageIndex;
+            LoadListBusPage(PageIndex);
+        }
 
-        //public void btPhanTrang_Click(object sender, EventArgs e)
-        //{
-        //    Button btn = (Button)sender;
-        //    int PageIndex = int.Parse(this.hPageIndex.Value);
-        //    TestLabel.Text = PageIndex.ToString();
-        //    //switch (btn.ID)
-        //    //{
-        //    //    case "btTruoc":
-        //    //        PageIndex = int.Parse(this.hPageIndex.Value);
-        //    //        PageIndex = (PageIndex > 0) ? PageIndex - 1 : 0;
-        //    //        this.hPageIndex.Value = PageIndex.ToString();
-        //    //        break;
-        //    //    case "btSau":
-        //    //        int TotalRows = int.Parse(hTotalRows.Value);
-        //    //        PageIndex = ((PageIndex + 1) * PageSize < TotalRows) ? PageIndex + 1 : PageIndex;
-        //    //        break;
-        //    //    default:
-        //    //        PageIndex = int.Parse(btn.Text) - 1;
-        //    //        break;
-        //    //}
-        //    //this.hPageIndex.Value = PageIndex.ToString();
-        //}
-
-        //private void LoadListBusPage(int pIndex)
-        //{
-        //    int TotalRows = 0;
-        //    this.listBus = HRFunctions.Instance.Bus_Pagination(PageSize, pIndex, out TotalRows);
-        //    this.hTotalRows.Value = TotalRows.ToString();
-        //    if (listBus == null || listBus.Count == 0)
-        //    {
-        //        this.pnPhanTrang.Visible = false;
-        //    }
-        //}
+        private void LoadListBusPage(int pIndex)
+        {
+            int TotalRows = 0;
+            this.listBus = HRFunctions.Instance.Bus_Pagination(PageSize, pIndex, out TotalRows);
+            this.hTotalRows.Value = TotalRows.ToString();
+            if (listBus == null || listBus.Count == 0)
+            {
+                this.pnPhanTrang.Visible = false;
+            }
+        }
     }
 }

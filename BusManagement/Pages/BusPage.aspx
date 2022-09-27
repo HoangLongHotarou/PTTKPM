@@ -124,7 +124,7 @@
 
     <div>
         <asp:Button ID="AddBusButton" runat="server" OnClick="AddBusButton_Click" Text="Thêm Mới" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
-        <asp:Button ID="UpdateBusButton" runat="server" OnClick="UpdateBusButton_Click" Text="Cập Nhật" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
+        <asp:Button ID="UpdateBusButton" runat="server" href="?page=<%=this.pivot%>" OnClick="UpdateBusButton_Click" Text="Cập Nhật" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
         <asp:Button ID="DeleteBusButton" runat="server" Text="Xóa" BackColor="#ff1a1a" BorderColor="#ff1a1a" CssClass="btn btn-primary" />
     </div>
 
@@ -158,17 +158,17 @@
                     <td class="text-center"><%= bus.BusTypeID %></td>
                     <td class="text-center"><%= bus.RoutesID %></td>
                     <td style="width: 50px;">
-                        <a style="text-align: center" href="?idEdit=<%=bus.BusID %>">Sửa</a>
+                        <a style="text-align: center" href="?idEdit=<%=bus.BusID %>&page=<%=this.pivot%>">Sửa</a>
                     </td>
                 </tr>
                 <% } %>
             </tbody>
         </table>
-      <%--  <div class="card-footer text-right">
+        <div class="card-footer text-right">
             <asp:Panel ID="pnPhanTrang" runat="server">
                 <div class="form-row">
                     <div class="col-auto">
-                        <asp:Button ID="btTruoc" runat="server" Text="Trước" class="btn btn-dark" OnClick="btPhanTrang_Click" />
+                        <asp:Button ID="btTruoc" runat="server" Text="Trước" class="btn btn-dark" href="?page=<%=this.pivot%>" OnClick="btPhanTrang_Click" />
                     </div>
                     <div class="col-auto">
                         <asp:HiddenField ID="hPageIndex" runat="server" />
@@ -177,11 +177,11 @@
                         <asp:Panel ID="pnButton" runat="server"></asp:Panel>
                     </div>
                     <div class="col-auto">
-                        <asp:Button ID="btSau" runat="server" Text="Sau" class="btn  btn-dark" OnClick="btPhanTrang_Click" />
+                        <asp:Button ID="btSau" runat="server" Text="Sau" class="btn  btn-dark" href="?page=<%=this.pivot%>" OnClick="btPhanTrang_Click" />
                     </div>
                 </div>
             </asp:Panel>
-        </div>--%>
+        </div>
     </div>
 
     <asp:Label ID="TestLabel" runat="server" Text="Test Label"></asp:Label>

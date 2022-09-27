@@ -169,6 +169,19 @@ namespace BusinessLayer
             }
         }
 
+        public int Get_Total_Rows()
+        {
+            using (var db = GetContext())
+            {
+                var list = db.Buses.AsQueryable();
+                if (list != null && list.Any())
+                {
+                    return list.Count();
+                }
+                return 0;
+            }
+        }
+
         public void Bus_Import(List<Bus> list)
         {
             using (var db = GetContext())

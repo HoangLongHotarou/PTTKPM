@@ -84,5 +84,15 @@ namespace BusinessLayer
         {
             return BusExt.Instance.Bus_Pagination(PageSize, PageIndex, out TotalRows);
         }
+
+        public List<BusType> Bus_Type_Pagination(int PageSize, int PageIndex, out int TotalRows)
+        {
+            return BusTypeExt.Instance.BusType_Find_KeyWord("",PageSize,PageIndex,out TotalRows);
+        }
+
+        public int Get_Bus_Total_Row()
+        {
+            return BusExt.Instance.Get_Total_Rows();
+        }
     }
 }
