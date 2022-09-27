@@ -16,75 +16,79 @@ namespace BusManagement.Pages
         {
             LoadListBusType();
             if (!IsPostBack)
-                LoadDropDownList();
+            {
+                LoadEditButton();
+            }                
         }
 
         protected void Insert_Click(object sender, EventArgs e)
         {
-            int id = HRFunctions.Instance.InsertUpdateBusType(0, TenLoai.Text, HangXe.Text);
-            LoadListBusType();
-            LoadDropDownList();       
-        }
-
-        private void LoadDropDownList()
-        {
-            GetAllBusTypeToDropDownList();
-            this.DropDownListIDLoaiXe.Items.Insert(0, "---Chọn ID loại xe---");                      
-        }
-
-        protected void DropDownListIDLoaiXe_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int id;   
-            bool check = int.TryParse(DropDownListIDLoaiXe.Text, out id);     
-            if (check)
+            if (string.IsNullOrWhiteSpace(TenLoai.Value) || string.IsNullOrWhiteSpace(HangXe.Value))
             {
-                BusType busType = HRFunctions.Instance.SelectBusTypeByID(id);
-                TenLoai.Text = busType.Name;
-                HangXe.Text = busType.CarMaker;
-            }         
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Chưa điền đầy đủ thông tin')", true);
+            }
             else
             {
+                int id = HRFunctions.Instance.InsertUpdateBusType(0, TenLoai.Value, HangXe.Value);
+                LoadListBusType();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Thêm thành công!')", true);
                 ClearAll();
-            }         
-        }
+            }                  
+        }       
 
         private void LoadListBusType()
         {
             BustypeList = HRFunctions.Instance.SelectAllBusType();
         }
 
+        private void LoadEditButton()
+        {
+            try
+            {
+                int idEdit = int.Parse(Request.QueryString["idedit"]);
+                BusType busType = HRFunctions.Instance.FindBusTypeByID(idEdit);
+                if (busType != null)
+                {
+                    this.IDLoaiXe.Value = busType.BusTypeID.ToString();
+                    this.TenLoai.Value = busType.Name;
+                    this.HangXe.Value = busType.CarMaker;
+                }
+            }
+            catch { }
+        }
+
         protected void Update_Click(object sender, EventArgs e)
         {
-            HRFunctions.Instance.InsertUpdateBusType(int.Parse(DropDownListIDLoaiXe.Text), TenLoai.Text, HangXe.Text);
-            LoadListBusType();
-        }      
-        
-        private void GetAllBusTypeToDropDownList()
-        {
-            this.DropDownListIDLoaiXe.DataSource = HRFunctions.Instance.SelectAllBusType();
-            this.DropDownListIDLoaiXe.DataTextField = "BusTypeID";
-            this.DropDownListIDLoaiXe.DataValueField = "BusTypeID";
-            this.DropDownListIDLoaiXe.DataBind();
+            if (string.IsNullOrWhiteSpace(IDLoaiXe.Value) || string.IsNullOrWhiteSpace(TenLoai.Value) || string.IsNullOrWhiteSpace(HangXe.Value))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Chưa điền đầy đủ thông tin')", true);
+            }
+            else
+            {
+                HRFunctions.Instance.InsertUpdateBusType(int.Parse(IDLoaiXe.Value), TenLoai.Value, HangXe.Value);
+                LoadListBusType();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Cập nhật thông tin thành công!')", true);
+                ClearAll();
+            }
+            
         }
 
         protected void Delete_Click(object sender, EventArgs e)
         {
-            int id;
-            bool check = int.TryParse(DropDownListIDLoaiXe.Text, out id);
-            if (check)
+            string selected = Request.Form["cbID"];
+            if (selected != null && selected.Trim().Length > 0)
             {
-                HRFunctions.Instance.DeleteBusType(id);
-                LoadListBusType();
-                LoadDropDownList();
-                ClearAll();
+                List<string> list = selected.Split(',').ToList();
+                HRFunctions.Instance.DeleteBusTypeIDs(list);
             }
+            LoadListBusType();
         }
 
         private void ClearAll()
         {
-            TenLoai.Text = "";
-            HangXe.Text = "";
-            DropDownListIDLoaiXe.SelectedIndex = 0;
+            IDLoaiXe.Value = "";
+            TenLoai.Value = "";
+            HangXe.Value = "";            
         }
     }
 }

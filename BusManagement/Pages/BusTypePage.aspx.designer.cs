@@ -13,31 +13,13 @@ namespace BusManagement.Pages {
     public partial class BusTypePage {
         
         /// <summary>
-        /// Label1 control.
+        /// IDLoaiXe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
-        /// DropDownListIDLoaiXe control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListIDLoaiXe;
-        
-        /// <summary>
-        /// Label2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText IDLoaiXe;
         
         /// <summary>
         /// TenLoai control.
@@ -46,16 +28,7 @@ namespace BusManagement.Pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TenLoai;
-        
-        /// <summary>
-        /// Label3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TenLoai;
         
         /// <summary>
         /// HangXe control.
@@ -64,33 +37,33 @@ namespace BusManagement.Pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox HangXe;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText HangXe;
         
         /// <summary>
-        /// Insert control.
+        /// AddBusButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Insert;
+        protected global::System.Web.UI.WebControls.Button AddBusButton;
         
         /// <summary>
-        /// Update control.
+        /// UpdateBusButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Update;
+        protected global::System.Web.UI.WebControls.Button UpdateBusButton;
         
         /// <summary>
-        /// Delete control.
+        /// DeleteBusButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Delete;
+        protected global::System.Web.UI.WebControls.Button DeleteBusButton;
     }
 }

@@ -38,10 +38,10 @@ namespace BusManagement.Pages
 
         protected void Search(object sender, EventArgs e)
         {
-            string licensePlate = LicensePlate.Text != "" ? $"LicensePlates='{LicensePlate.Text}' and " : "";
-            string busNumber = BusNumber.Text != "" ? $"BusNumber='{BusNumber.Text}' and " : "";
-            string sumSeats = SumSeat.Text != "" ? $"SumSeats='{SumSeat.Text}' and " : "";
-            string status = Status.Text != "" ? $"Status='{Status.Text}' and " : "";
+            string licensePlate = LicensePlate.Value != "" ? $"LicensePlates='{LicensePlate.Value}' and " : "";
+            string busNumber = BusNumber.Value != "" ? $"BusNumber='{BusNumber.Value}' and " : "";
+            string sumSeats = SumSeat.Value != "" ? $"SumSeats='{SumSeat.Value}' and " : "";
+            string status = Status.Value != "" ? $"Status='{Status.Value}' and " : "";
             string busType = this.BusTypeList.Text != "Loai xe" ? $"BusTypeID={int.Parse(this.BusTypeList.Text)} and " : "";
             string routes = RoutesList.Text != "Tuyen" ? $"RoutesID={RoutesList.Text} and " : "";
 

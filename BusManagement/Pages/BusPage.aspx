@@ -157,8 +157,8 @@
                     <td class="text-center"><%= bus.Status %></td>
                     <td class="text-center"><%= bus.BusTypeID %></td>
                     <td class="text-center"><%= bus.RoutesID %></td>
-                    <td style="width: 50px;">
-                        <a style="text-align: center" href="?idEdit=<%=bus.BusID %>">Sửa</a>
+                    <td class="text-center">
+                        <a href="?idEdit=<%=bus.BusID %>">Sửa</a>
                     </td>
                 </tr>
                 <% } %>
