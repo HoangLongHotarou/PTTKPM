@@ -34,24 +34,47 @@ namespace BusManagement.Pages
 
         protected void AddBusButton_Click(object sender, EventArgs e)
         {
-            Bus bus = new Bus
-            {
-                LicensePlates = this.BienSoXe.Value,
-                BusNumber = this.SoXe.Value,
-                SumSeats = int.Parse(this.SoChoNgoi.Value),
-                Status = this.TrangThai.Value,
-                BusTypeID = int.Parse(this.bustypelist.Text),
-                RoutesID = int.Parse(this.tuyenlist.Text),
-            };
+				if (!CheckNull())
+				{
+                //ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "swal('Warning!','Bạn không được để trống !!!','warning')", true);
+                //Response.Write("<script>alert('Bạn không được để trống các ô')</script>");
+                //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Bạn không được để trống các ô')", true);
+                ShowAlert("swal('Warning!','Bạn không được để trống các ô !!!','warning')");
+            }
+				else
+				{
+                Bus bus = new Bus
+                {
+                    LicensePlates = this.BienSoXe.Value,
+                    BusNumber = this.SoXe.Value,
+                    SumSeats = int.Parse(this.SoChoNgoi.Value),
+                    Status = this.TrangThai.Value,
+                    BusTypeID = int.Parse(this.bustypelist.Text),
+                    RoutesID = int.Parse(this.tuyenlist.Text),
+                };
 
-            HRFunctions.Instance.AddBus(bus);
-            ClearInput();
+                HRFunctions.Instance.AddBus(bus);
+                ShowAlert("swal('Success!','Thêm xe thành công!','success')");
+
+            }
             //int TotalRows = int.Parse(this.hTotalRows.Value);
             //int count = TotalRows / PageSize;
             LoadList();
             //LoadListBusPage(count);
             LoadDropDownList();
             ClearInput();
+
+        }
+
+
+        protected bool CheckNull()
+		  {
+            if (string.IsNullOrWhiteSpace(this.BienSoXe.Value) || string.IsNullOrWhiteSpace(this.SoXe.Value) ||
+                string.IsNullOrWhiteSpace(this.SoChoNgoi.Value) || string.IsNullOrWhiteSpace(this.TrangThai.Value))
+				{
+                return false;
+				}
+            return true;
         }
 
         protected void ClearInput()
@@ -107,20 +130,41 @@ namespace BusManagement.Pages
 
         protected void UpdateBusButton_Click(object sender, EventArgs e)
         {
-            Bus bus = HRFunctions.Instance.FindBusByID(int.Parse(this.BusID.Value));
+            if (!CheckNull())
+            {
+                ShowAlert("swal('Warning!','Bạn không được để trống các ô !!!','warning')");
+            }
+            else
+				{
+					 if (string.IsNullOrWhiteSpace(this.BusID.Value))
+					 {
+                    ShowAlert("swal('Warning!','Chưa chọn xe để cập nhật!!!','warning')");
+                }
+					 else
+					 {
+                    Bus bus = HRFunctions.Instance.FindBusByID(int.Parse(this.BusID.Value));
 
-            bus.LicensePlates = this.BienSoXe.Value;
-            bus.BusNumber = this.SoXe.Value;
-            bus.SumSeats = int.Parse(this.SoChoNgoi.Value);
-            bus.Status = this.TrangThai.Value;
-            bus.BusTypeID = int.Parse(this.bustypelist.Text);
-            bus.RoutesID = int.Parse(this.tuyenlist.Text);
+                    bus.LicensePlates = this.BienSoXe.Value;
+                    bus.BusNumber = this.SoXe.Value;
+                    bus.SumSeats = int.Parse(this.SoChoNgoi.Value);
+                    bus.Status = this.TrangThai.Value;
+                    bus.BusTypeID = int.Parse(this.bustypelist.Text);
+                    bus.RoutesID = int.Parse(this.tuyenlist.Text);
 
-            HRFunctions.Instance.AddBus(bus);
+                    HRFunctions.Instance.AddBus(bus);
+                    ShowAlert("swal('Success!','Cập nhật xe thành công!','success')");
+                }
+            }
+
             LoadList();
             //LoadListBusPage(int.Parse(this.hPageIndex.Value));
             LoadDropDownList();
             ClearInput();
+        }
+
+        private void ShowAlert(string note)
+		  {
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", note, true);
         }
 
         protected void LoadDropDownList()
@@ -140,74 +184,81 @@ namespace BusManagement.Pages
             //this.BusList.Items.Insert(0, "ID xe");
         }
 
-        //protected void DeleteBusButton_CLick(object sender, EventArgs e)
-        //{
-        //    HRFunctions.Instance.DeleteBusByID(int.Parse(this.BusList.Text));
-        //    LoadList();
-        //    LoadDropDownList();
-        //    ClearInput();
-        //}
+		  protected void DeleteBusButton_CLick(object sender, EventArgs e)
+		  {
+            string selected = Request.Form["cbID"];
+            if (selected != null && selected.Trim().Length > 0)
+            {
+                List<string> list = selected.Split(',').ToList();
+                HRFunctions.Instance.DeleteBusByIDs(list);
+                ShowAlert("swal('Success!','Xóa xe thành công!','success')");
+            }
 
-        //private void LoadPhanTrang()
-        //{
-        //    try
-        //    {
-        //        int TotalRows = int.Parse(this.hTotalRows.Value);                
-        //        int count = TotalRows / PageSize;
-        //        if (TotalRows % PageSize > 0)
-        //            count++;
-        //        if (count > 20)
-        //            count = 20;
-        //        this.pnButton.Controls.Clear();
-        //        for (int i = 0; i < count; i++)
-        //        {
-        //            Button bt = new Button()
-        //            {
-        //                ID = "bt" + i,
-        //                Text = (i + 1).ToString()
-        //            };
-        //            bt.Attributes.Add("runat", "server");
-        //            bt.Click += new EventHandler(this.btPhanTrang_Click);
-        //            bt.CssClass = "btn btn-dark";
-        //            this.pnButton.Controls.Add(bt);                
-        //        }
+            LoadList();
+				LoadDropDownList();
+				ClearInput();
+		  }
 
-        //    }
-        //    catch { }
-        //}
+		  //private void LoadPhanTrang()
+		  //{
+		  //    try
+		  //    {
+		  //        int TotalRows = int.Parse(this.hTotalRows.Value);                
+		  //        int count = TotalRows / PageSize;
+		  //        if (TotalRows % PageSize > 0)
+		  //            count++;
+		  //        if (count > 20)
+		  //            count = 20;
+		  //        this.pnButton.Controls.Clear();
+		  //        for (int i = 0; i < count; i++)
+		  //        {
+		  //            Button bt = new Button()
+		  //            {
+		  //                ID = "bt" + i,
+		  //                Text = (i + 1).ToString()
+		  //            };
+		  //            bt.Attributes.Add("runat", "server");
+		  //            bt.Click += new EventHandler(this.btPhanTrang_Click);
+		  //            bt.CssClass = "btn btn-dark";
+		  //            this.pnButton.Controls.Add(bt);                
+		  //        }
 
-        //public void btPhanTrang_Click(object sender, EventArgs e)
-        //{
-        //    Button btn = (Button)sender;
-        //    int PageIndex = int.Parse(this.hPageIndex.Value);
-        //    TestLabel.Text = PageIndex.ToString();
-        //    //switch (btn.ID)
-        //    //{
-        //    //    case "btTruoc":
-        //    //        PageIndex = int.Parse(this.hPageIndex.Value);
-        //    //        PageIndex = (PageIndex > 0) ? PageIndex - 1 : 0;
-        //    //        this.hPageIndex.Value = PageIndex.ToString();
-        //    //        break;
-        //    //    case "btSau":
-        //    //        int TotalRows = int.Parse(hTotalRows.Value);
-        //    //        PageIndex = ((PageIndex + 1) * PageSize < TotalRows) ? PageIndex + 1 : PageIndex;
-        //    //        break;
-        //    //    default:
-        //    //        PageIndex = int.Parse(btn.Text) - 1;
-        //    //        break;
-        //    //}
-        //    //this.hPageIndex.Value = PageIndex.ToString();
-        //}
+		  //    }
+		  //    catch { }
+		  //}
 
-        //private void LoadListBusPage(int pIndex)
-        //{
-        //    int TotalRows = 0;
-        //    this.listBus = HRFunctions.Instance.Bus_Pagination(PageSize, pIndex, out TotalRows);
-        //    this.hTotalRows.Value = TotalRows.ToString();
-        //    if (listBus == null || listBus.Count == 0)
-        //    {
-        //        this.pnPhanTrang.Visible = false;
-        //    }
-        //}
-    }
+		  //public void btPhanTrang_Click(object sender, EventArgs e)
+		  //{
+		  //    Button btn = (Button)sender;
+		  //    int PageIndex = int.Parse(this.hPageIndex.Value);
+		  //    TestLabel.Text = PageIndex.ToString();
+		  //    //switch (btn.ID)
+		  //    //{
+		  //    //    case "btTruoc":
+		  //    //        PageIndex = int.Parse(this.hPageIndex.Value);
+		  //    //        PageIndex = (PageIndex > 0) ? PageIndex - 1 : 0;
+		  //    //        this.hPageIndex.Value = PageIndex.ToString();
+		  //    //        break;
+		  //    //    case "btSau":
+		  //    //        int TotalRows = int.Parse(hTotalRows.Value);
+		  //    //        PageIndex = ((PageIndex + 1) * PageSize < TotalRows) ? PageIndex + 1 : PageIndex;
+		  //    //        break;
+		  //    //    default:
+		  //    //        PageIndex = int.Parse(btn.Text) - 1;
+		  //    //        break;
+		  //    //}
+		  //    //this.hPageIndex.Value = PageIndex.ToString();
+		  //}
+
+		  //private void LoadListBusPage(int pIndex)
+		  //{
+		  //    int TotalRows = 0;
+		  //    this.listBus = HRFunctions.Instance.Bus_Pagination(PageSize, pIndex, out TotalRows);
+		  //    this.hTotalRows.Value = TotalRows.ToString();
+		  //    if (listBus == null || listBus.Count == 0)
+		  //    {
+		  //        this.pnPhanTrang.Visible = false;
+		  //    }
+		  //}
+	 }
 }

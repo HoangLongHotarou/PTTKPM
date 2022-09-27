@@ -68,7 +68,6 @@
             </tbody>
         </table>
     </div>--%>
-
     <div class="container mt-3">
         <div class="row mb-3">
             <div class="col">
@@ -80,7 +79,7 @@
             <div class="col">
                 <div class="row align-items-center">
                     <label for="BienSoXe" class="form-label col-3">Biển số xe</label>
-                    <input id="BienSoXe" type="text" class="form-control col" placeholder="Nhập vào biển số xe" runat="server">
+                    <input id="BienSoXe" type="text" class="form-control col" placeholder="Nhập vào biển số xe" runat="server" title="" pattern="[0-9]{2}[A-Z]{1}[-]{1}[0-9]{5}">
                 </div>
             </div>
         </div>
@@ -123,9 +122,9 @@
     </div>
 
     <div>
-        <asp:Button ID="AddBusButton" runat="server" OnClick="AddBusButton_Click" Text="Thêm Mới" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
+        <asp:Button ID="AddBusButton" runat="server" OnClick="AddBusButton_Click" Text="Thêm Mới" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" OnClientClick="" />
         <asp:Button ID="UpdateBusButton" runat="server" OnClick="UpdateBusButton_Click" Text="Cập Nhật" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
-        <asp:Button ID="DeleteBusButton" runat="server" Text="Xóa" BackColor="#ff1a1a" BorderColor="#ff1a1a" CssClass="btn btn-primary" />
+        <asp:Button ID="DeleteBusButton" runat="server" OnClick="DeleteBusButton_CLick" Text="Xóa" BackColor="#ff1a1a" OnClientClick="return confirm('Bạn có muốn xóa không?')" BorderColor="#ff1a1a" CssClass="btn btn-primary" />
     </div>
 
     <div class="mt-3">

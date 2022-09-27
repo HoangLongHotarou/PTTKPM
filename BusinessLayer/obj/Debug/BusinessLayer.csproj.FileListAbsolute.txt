@@ -10,3 +10,15 @@ F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\B
 F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
 F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.dll
 F:\University\final_Year\PhanTichThietKe\BusManagement\BusinessLayer\obj\Debug\BusinessLayer.pdb
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\bin\Debug\BusinessLayer.dll
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\bin\Debug\BusinessLayer.pdb
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\bin\Debug\EntityFramework.dll
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\bin\Debug\EntityFramework.xml
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\obj\Debug\BusinessLayer.dll
+E:\HK1_Nam4\PhanTichVaThietKeHeThong\PTTKPM\PTTKPM\BusinessLayer\obj\Debug\BusinessLayer.pdb
