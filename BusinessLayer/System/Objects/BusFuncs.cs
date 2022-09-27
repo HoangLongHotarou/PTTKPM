@@ -34,6 +34,14 @@ namespace BusinessLayer
             }
         }
 
+        public Bus Bus_Select_BienSoXe(string biensoxe)
+        {
+            using (var db = GetContext())
+            {
+                return db.Buses.FirstOrDefault(s => s.LicensePlates == biensoxe);
+            }
+        }
+
         public List<Bus> Bus_Select_IDs(List<string> IDs)
         {
             using (var db = GetContext())

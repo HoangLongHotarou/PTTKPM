@@ -34,19 +34,27 @@ namespace BusManagement.Pages
         {
             if (string.IsNullOrWhiteSpace(TenLoai.Value) || string.IsNullOrWhiteSpace(HangXe.Value))
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Chưa điền đầy đủ thông tin')", true);
+                ShowAlert("swal('Warning!','Chưa nhập đủ thông tin!','warning')");
             }
             else
             {
-                int id = HRFunctions.Instance.InsertUpdateBusType(0, TenLoai.Value, HangXe.Value);
-                //LoadListBusType();
-                //LoadListBusTypePage(0);
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Thêm thành công!')", true);
-                ClearAll();
+                if (HRFunctions.Instance.FindBusTypeByBusTypeNameAndCarMarker(this.TenLoai.Value, this.HangXe.Value) == null)
+                {
+                    int id = HRFunctions.Instance.InsertUpdateBusType(0, TenLoai.Value, HangXe.Value);
+                    //LoadListBusType();
+                    //LoadListBusTypePage(0);
+                    ShowAlert("swal('Success!','Thêm loại xe thành công!','success')");
+                    ClearAll();
+                }
+                else
+                {
+                    ShowAlert("swal('Error!','Tên loại và hãng xe đã tồn tại!','error')");
+                }
+
             }
             LoadListBusTypePage(0);
             LoadPhanTrang();
-        }       
+        }
 
         private void LoadListBusType()
         {
@@ -75,29 +83,38 @@ namespace BusManagement.Pages
         {
             if (string.IsNullOrWhiteSpace(IDLoaiXe.Value) || string.IsNullOrWhiteSpace(TenLoai.Value) || string.IsNullOrWhiteSpace(HangXe.Value))
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Chưa điền đầy đủ thông tin')", true);
+                ShowAlert("swal('Warning!','Chưa nhập đủ thông tin!','warning')");
             }
             else
             {
-                HRFunctions.Instance.InsertUpdateBusType(int.Parse(IDLoaiXe.Value), TenLoai.Value, HangXe.Value);
-                LoadListBusTypePage(0);
-
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Cập nhật thông tin thành công!')", true);
-                ClearAll();
-
-                try
+                if (HRFunctions.Instance.FindBusTypeByBusTypeNameAndCarMarker(this.TenLoai.Value, this.HangXe.Value) == null)
                 {
-                    pivot = int.Parse(Request.QueryString["page"]);
+                    HRFunctions.Instance.InsertUpdateBusType(int.Parse(IDLoaiXe.Value), TenLoai.Value, HangXe.Value);
+                    LoadListBusTypePage(0);
+
+                    ShowAlert("swal('Success!','Cập nhật loại xe thành công!','success')");
+                    ClearAll();
+
+                    try
+                    {
+                        pivot = int.Parse(Request.QueryString["page"]);
+                    }
+                    catch
+                    {
+                        pivot = 0;
+                    }
+
+                    //Them do
+                    PropertyInfo isreadonly = typeof(System.Collections.Specialized.NameValueCollection).GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
+                    isreadonly.SetValue(this.Request.QueryString, false, null);
+                    Request.QueryString.Clear();
                 }
-                catch
+                else
                 {
-                    pivot = 0;
+                    ShowAlert("swal('Error!','Tên loại và hãng xe đã tồn tại!','error')");
+
                 }
 
-                //Them do
-                PropertyInfo isreadonly = typeof(System.Collections.Specialized.NameValueCollection).GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
-                isreadonly.SetValue(this.Request.QueryString, false, null);
-                Request.QueryString.Clear();
             }
             LoadListBusTypePage(pivot);
         }
@@ -109,16 +126,21 @@ namespace BusManagement.Pages
             {
                 List<string> list = selected.Split(',').ToList();
                 HRFunctions.Instance.DeleteBusTypeIDs(list);
+                ShowAlert("swal('Success!','Xóa loại xe thành công!','success')");
             }
             LoadListBusTypePage(0);
             LoadPhanTrang();
         }
 
+        private void ShowAlert(string note)
+        {
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", note, true);
+        }
         private void ClearAll()
         {
             IDLoaiXe.Value = "";
             TenLoai.Value = "";
-            HangXe.Value = "";            
+            HangXe.Value = "";
         }
 
         private void LoadPhanTrang()
