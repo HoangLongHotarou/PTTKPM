@@ -156,8 +156,8 @@
                     <td class="text-center"><%= bus.Status %></td>
                     <td class="text-center"><%= bus.BusTypeID %></td>
                     <td class="text-center"><%= bus.RoutesID %></td>
-                    <td style="width: 50px;">
-                        <a style="text-align: center" href="?idEdit=<%=bus.BusID %>&page=<%=this.pivot%>">Sửa</a>
+                    <td class="text-center">
+                        <a href="?idEdit=<%=bus.BusID %>&page=<%=this.pivot%>">Sửa</a>
                     </td>
                 </tr>
                 <% } %>
@@ -165,9 +165,9 @@
         </table>
         <div class="card-footer text-right">
             <asp:Panel ID="pnPhanTrang" runat="server">
-                <div class="form-row">
+                <div class="row">
                     <div class="col-auto">
-                        <asp:Button ID="btTruoc" runat="server" Text="Trước" class="btn btn-dark" href="?page=<%=this.pivot%>" OnClick="btPhanTrang_Click" />
+                        <asp:Button ID="btTruoc" runat="server" Text="Trước" BackColor="#339933" BorderColor="#339933" class="btn btn-primary" href="?page=<%=this.pivot%>" OnClick="btPhanTrang_Click" />
                     </div>
                     <div class="col-auto">
                         <asp:HiddenField ID="hPageIndex" runat="server" />
@@ -176,14 +176,12 @@
                         <asp:Panel ID="pnButton" runat="server"></asp:Panel>
                     </div>
                     <div class="col-auto">
-                        <asp:Button ID="btSau" runat="server" Text="Sau" class="btn  btn-dark" href="?page=<%=this.pivot%>" OnClick="btPhanTrang_Click" />
+                        <asp:Button ID="btSau" runat="server" Text="Sau" BackColor="#339933" BorderColor="#339933" class="btn btn-primary" href="?page=<%=this.pivot%>" OnClick="btPhanTrang_Click" />
                     </div>
                 </div>
             </asp:Panel>
         </div>
     </div>
-
-    <asp:Label ID="TestLabel" runat="server" Text="Test Label"></asp:Label>
 
     <script>
         $("#selectAll").click(function () {

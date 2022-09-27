@@ -74,7 +74,12 @@ namespace BusinessLayer
         {
             BusTypeExt.Instance.BusType_Delete(id);
         }
-        
+
+        public void DeleteBusTypeIDs(List<string> ids)
+        {
+            BusTypeExt.Instance.BusType_Delete_BusTypeIDs(ids);
+        }
+
         public void DeleteBusByID(int id)
         {
             BusExt.Instance.Bus_Delete(id);
@@ -87,7 +92,7 @@ namespace BusinessLayer
 
         public List<BusType> Bus_Type_Pagination(int PageSize, int PageIndex, out int TotalRows)
         {
-            return BusTypeExt.Instance.BusType_Find_KeyWord("",PageSize,PageIndex,out TotalRows);
+            return BusTypeExt.Instance.BusType_Pagination(PageSize,PageIndex,out TotalRows);
         }
 
         public int Get_Bus_Total_Row()

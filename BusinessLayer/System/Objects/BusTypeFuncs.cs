@@ -151,6 +151,22 @@ namespace BusinessLayer
                 return new List<BusType>();
             }
         }
+
+        public List<BusType> BusType_Pagination(int PageSize, int PageIndex, out int TotalRows)
+        {
+            TotalRows = 0;
+            using (var db = GetContext())
+            {
+                var list = db.BusTypes.AsQueryable();
+                if (list != null && list.Any())
+                {
+                    TotalRows = list.Count();
+                    return list.OrderByDescending(s => s.BusTypeID).Skip(PageSize * PageIndex).Take(PageSize).ToList();
+                }
+                return new List<BusType>();
+            }
+        }
+
         public void BusType_Import(List<BusType> list)
         {
             using (var db = GetContext())

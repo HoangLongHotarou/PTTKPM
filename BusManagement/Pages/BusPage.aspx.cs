@@ -2,6 +2,7 @@
 using BusinessLayer.DBAccess;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -130,7 +131,13 @@ namespace BusManagement.Pages
                     HRFunctions.Instance.AddBus(bus);
                     ShowAlert("swal('Success!','Cập nhật xe thành công!','success')");
 
-                    pivot = int.Parse(Request.QueryString["page"]);
+                    try
+                    {
+                        pivot = int.Parse(Request.QueryString["page"]);
+                    }catch
+                    {
+                        pivot = 0;
+                    }
 
                     //Them do
                     PropertyInfo isreadonly = typeof(System.Collections.Specialized.NameValueCollection).GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -165,6 +172,7 @@ namespace BusManagement.Pages
             //this.BusList.Items.Insert(0, "ID xe");
         }
 
+
         private void LoadPhanTrang()
         {
             try
@@ -185,7 +193,8 @@ namespace BusManagement.Pages
                     };
                     bt.Attributes.Add("runat", "server");
                     bt.Click += new EventHandler(this.btPhanTrang_Click);
-                    bt.CssClass = "btn btn-dark";
+                    bt.CssClass = "btn btn-custome";
+                    
                     this.pnButton.Controls.Add(bt);
                 }
 
@@ -213,7 +222,6 @@ namespace BusManagement.Pages
                     break;
             }
             this.hPageIndex.Value = PageIndex.ToString();
-            this.TestLabel.Text = this.hPageIndex.Value.ToString();
             pivot = PageIndex;
             LoadListBusPage(PageIndex);
         }
