@@ -42,18 +42,27 @@ namespace BusManagement.Pages
             }
             else
             {
-                Bus bus = new Bus
-                {
-                    LicensePlates = this.BienSoXe.Value,
-                    BusNumber = this.SoXe.Value,
-                    SumSeats = int.Parse(this.SoChoNgoi.Value),
-                    Status = this.TrangThai.Value,
-                    BusTypeID = int.Parse(this.bustypelist.Text),
-                    RoutesID = int.Parse(this.tuyenlist.Text),
-                };
-                HRFunctions.Instance.AddBus(bus);
-                ShowAlert("swal('Success!','Thêm xe thành công!','success')");
-                ClearInput();
+                if(HRFunctions.Instance.FindBusByBienSoXe(this.BienSoXe.Value) == null)
+					 {
+                    Bus bus = new Bus
+                    {
+                        LicensePlates = this.BienSoXe.Value,
+                        BusNumber = this.SoXe.Value,
+                        SumSeats = int.Parse(this.SoChoNgoi.Value),
+                        Status = this.TrangThai.Value,
+                        BusTypeID = int.Parse(this.bustypelist.Text),
+                        RoutesID = int.Parse(this.tuyenlist.Text),
+                    };
+                    HRFunctions.Instance.AddBus(bus);
+                    ShowAlert("swal('Success!','Thêm xe thành công!','success')");
+                    ClearInput();
+					 }
+					 else
+					 {
+                    ShowAlert("swal('Error!','Biển số xe đã tồn tại!','error')");
+                }
+
+                
             }
             LoadListBusPage(0);
             LoadDropDownList();
@@ -111,7 +120,7 @@ namespace BusManagement.Pages
             {
                 ShowAlert("swal('Warning!','Bạn không được để trống các ô !!!','warning')");
             }
-            else
+            else if (HRFunctions.Instance.FindBusByBienSoXe(this.BienSoXe.Value) == null)
             {
                 if (string.IsNullOrWhiteSpace(this.BusID.Value))
                 {
@@ -134,7 +143,8 @@ namespace BusManagement.Pages
                     try
                     {
                         pivot = int.Parse(Request.QueryString["page"]);
-                    }catch
+                    }
+                    catch
                     {
                         pivot = 0;
                     }
@@ -143,11 +153,15 @@ namespace BusManagement.Pages
                     PropertyInfo isreadonly = typeof(System.Collections.Specialized.NameValueCollection).GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
                     isreadonly.SetValue(this.Request.QueryString, false, null);
                     Request.QueryString.Clear();
+                    ClearInput();
                 }
+            }
+				else
+				{
+                ShowAlert("swal('Error!','Biển số xe đã tồn tại!','error')");
             }
             LoadListBusPage(pivot);
             LoadDropDownList();
-            ClearInput();
         }
 
         private void ShowAlert(string note)

@@ -103,5 +103,15 @@ namespace BusinessLayer
         {
             BusExt.Instance.Bus_Delete_IDs(list);
         }
+
+        public Bus FindBusByBienSoXe(string biensoxe)
+		  {
+            return BusExt.Instance.Bus_Select_BienSoXe(biensoxe);
+		  }
+
+        public BusType FindBusTypeByBusTypeNameAndCarMarker(string bustypename,string carmarker)
+        {
+            return BusTypeExt.Instance.BusType_Select_BusTypeName(bustypename, carmarker);
+        }
     }
 }

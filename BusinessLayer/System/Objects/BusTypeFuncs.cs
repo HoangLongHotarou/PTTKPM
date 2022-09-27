@@ -32,6 +32,15 @@ namespace BusinessLayer
                 return db.BusTypes.FirstOrDefault(s => s.BusTypeID == BusTypeID);
             }
         }
+
+        public BusType BusType_Select_BusTypeName(string bustypename,string carmarker)
+        {
+            using (var db = GetContext())
+            {
+                return db.BusTypes.FirstOrDefault(s => s.Name == bustypename && s.CarMaker == carmarker);
+            }
+        }
+
         public List<BusType> BusType_Select_BusTypeIDs(List<string> BusTypeIDs)
         {
             using (var db = GetContext())
