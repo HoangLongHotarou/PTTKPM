@@ -235,6 +235,10 @@ namespace BusManagement.Pages
             {
                 this.pnPhanTrang.Visible = false;
             }
+            else
+            {
+                this.pnPhanTrang.Visible = true;
+            }
         }
 
         protected void DeleteBusButton_CLick(object sender, EventArgs e)

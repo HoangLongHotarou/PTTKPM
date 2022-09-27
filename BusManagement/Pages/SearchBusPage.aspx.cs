@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using BusinessLayer.DBAccess;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -38,10 +39,10 @@ namespace BusManagement.Pages
 
         protected void Search(object sender, EventArgs e)
         {
-            string licensePlate = LicensePlate.Value != "" ? $"LicensePlates='{LicensePlate.Value}' and " : "";
-            string busNumber = BusNumber.Value != "" ? $"BusNumber='{BusNumber.Value}' and " : "";
-            string sumSeats = SumSeat.Value != "" ? $"SumSeats='{SumSeat.Value}' and " : "";
-            string status = Status.Value != "" ? $"Status='{Status.Value}' and " : "";
+            string licensePlate = !LicensePlate.Value.IsNullOrWhiteSpace() ? $"LicensePlates='{LicensePlate.Value}' and " : "";
+            string busNumber = !BusNumber.Value.IsNullOrWhiteSpace() ? $"BusNumber='{BusNumber.Value}' and " : "";
+            string sumSeats = !SumSeat.Value.IsNullOrWhiteSpace() ? $"SumSeats='{SumSeat.Value}' and " : "";
+            string status = !Status.Value.IsNullOrWhiteSpace() ? $"Status='{Status.Value}' and " : "";
             string busType = this.BusTypeList.Text != "Loai xe" ? $"BusTypeID={int.Parse(this.BusTypeList.Text)} and " : "";
             string routes = RoutesList.Text != "Tuyen" ? $"RoutesID={RoutesList.Text} and " : "";
 

@@ -93,7 +93,7 @@
             <div class="col">
                 <div class="row align-items-center">
                     <label for="SoChoNgoi" class="form-label col-3">Số chỗ ngồi</label>
-                    <input id="SoChoNgoi" type="number" class="form-control col" placeholder="Nhập vào số chỗ ngồi" runat="server" min="4">
+                    <input id="SoChoNgoi" type="number" class="form-control col" placeholder="Nhập vào số chỗ ngồi" runat="server" min="4" max="40">
                 </div>
             </div>
         </div>
