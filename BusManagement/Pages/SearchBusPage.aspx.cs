@@ -37,25 +37,25 @@ namespace BusManagement.Pages
             this.BusTypeList.Items.Insert(0, "Loai xe");
         }
 
-        protected void Search(object sender, EventArgs e)
-        {
-            string licensePlate = !LicensePlate.Value.IsNullOrWhiteSpace() ? $"LicensePlates='{LicensePlate.Value}' and " : "";
-            string busNumber = !BusNumber.Value.IsNullOrWhiteSpace() ? $"BusNumber='{BusNumber.Value}' and " : "";
-            string sumSeats = !SumSeat.Value.IsNullOrWhiteSpace() ? $"SumSeats='{SumSeat.Value}' and " : "";
-            string status = !Status.Value.IsNullOrWhiteSpace() ? $"Status='{Status.Value}' and " : "";
-            string busType = this.BusTypeList.Text != "Loai xe" ? $"BusTypeID={int.Parse(this.BusTypeList.Text)} and " : "";
-            string routes = RoutesList.Text != "Tuyen" ? $"RoutesID={RoutesList.Text} and " : "";
+        //protected void Search(object sender, EventArgs e)
+        //{
+        //    string licensePlate = !LicensePlate.Value.IsNullOrWhiteSpace() ? $"LicensePlates='{LicensePlate.Value}' and " : "";
+        //    string busNumber = !BusNumber.Value.IsNullOrWhiteSpace() ? $"BusNumber='{BusNumber.Value}' and " : "";
+        //    string sumSeats = !SumSeat.Value.IsNullOrWhiteSpace() ? $"SumSeats='{SumSeat.Value}' and " : "";
+        //    string status = !Status.Value.IsNullOrWhiteSpace() ? $"Status='{Status.Value}' and " : "";
+        //    string busType = this.BusTypeList.Text != "Loai xe" ? $"BusTypeID={int.Parse(this.BusTypeList.Text)} and " : "";
+        //    string routes = RoutesList.Text != "Tuyen" ? $"RoutesID={RoutesList.Text} and " : "";
 
-            string multiQuery = $"{licensePlate + busNumber + sumSeats + busType + status + routes}";
-            Debug.WriteLine(multiQuery);
-            if (multiQuery == "")
-            {
-                listResult = HRFunctions.Instance.SelectAllBus();
-                return;
-            }
-            int lastPs = multiQuery.LastIndexOf("and");
-            multiQuery = multiQuery.Substring(0, lastPs);
-            listResult = HRFunctions.Instance.SearchBusByCriteria(multiQuery);
-        }
+        //    string multiQuery = $"{licensePlate + busNumber + sumSeats + busType + status + routes}";
+        //    Debug.WriteLine(multiQuery);
+        //    if (multiQuery == "")
+        //    {
+        //        listResult = HRFunctions.Instance.SelectAllBus();
+        //        return;
+        //    }
+        //    int lastPs = multiQuery.LastIndexOf("and");
+        //    multiQuery = multiQuery.Substring(0, lastPs);
+        //    listResult = HRFunctions.Instance.SearchBusByCriteria(multiQuery);
+        //}
     }
 }

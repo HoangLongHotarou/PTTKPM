@@ -1,7 +1,9 @@
 ﻿using BusinessLayer;
 using BusinessLayer.DBAccess;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -25,10 +27,12 @@ namespace BusManagement.Pages
             {
                 this.hPageIndex.Value = "0";
                 LoadDropDownList();
-                LoadListBusPage(0);
+            }
+            LoadListBusPage(0);
+            if (!IsPostBack)
+            {
                 LoadEditButton();
             }
-            this.LoadPhanTrang();
         }
 
         protected void AddBusButton_Click(object sender, EventArgs e)
@@ -40,40 +44,35 @@ namespace BusManagement.Pages
                 //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Bạn không được để trống các ô')", true);
                 ShowAlert("swal('Warning!','Bạn không được để trống các ô !!!','warning')");
             }
+            else if (HRFunctions.Instance.FindBusByBienSoXe(this.BienSoXe.Value) == null)
+            {
+                Bus bus = new Bus
+                {
+                    LicensePlates = this.BienSoXe.Value,
+                    BusNumber = this.SoXe.Value,
+                    SumSeats = int.Parse(this.SoChoNgoi.Value),
+                    Status = this.TrangThai.Value,
+                    BusTypeID = int.Parse(this.bustypelist.Text),
+                    RoutesID = int.Parse(this.tuyenlist.Text),
+                };
+                HRFunctions.Instance.AddBus(bus);
+                ShowAlert("swal('Success!','Thêm xe thành công!','success')");
+                ClearInput();
+            }
             else
             {
-                if(HRFunctions.Instance.FindBusByBienSoXe(this.BienSoXe.Value) == null)
-					 {
-                    Bus bus = new Bus
-                    {
-                        LicensePlates = this.BienSoXe.Value,
-                        BusNumber = this.SoXe.Value,
-                        SumSeats = int.Parse(this.SoChoNgoi.Value),
-                        Status = this.TrangThai.Value,
-                        BusTypeID = int.Parse(this.bustypelist.Text),
-                        RoutesID = int.Parse(this.tuyenlist.Text),
-                    };
-                    HRFunctions.Instance.AddBus(bus);
-                    ShowAlert("swal('Success!','Thêm xe thành công!','success')");
-                    ClearInput();
-					 }
-					 else
-					 {
-                    ShowAlert("swal('Error!','Biển số xe đã tồn tại!','error')");
-                }
-
-                
+                ShowAlert("swal('Error!','Biển số xe đã tồn tại!','error')");
             }
-            LoadListBusPage(0);
+            LoadListBusPage(0,false);
             LoadDropDownList();
-            LoadPhanTrang();
         }
 
 
         protected bool CheckNull()
         {
             if (string.IsNullOrWhiteSpace(this.BienSoXe.Value) || string.IsNullOrWhiteSpace(this.SoXe.Value) ||
-                string.IsNullOrWhiteSpace(this.SoChoNgoi.Value) || string.IsNullOrWhiteSpace(this.TrangThai.Value))
+                string.IsNullOrWhiteSpace(this.SoChoNgoi.Value) || string.IsNullOrWhiteSpace(this.TrangThai.Value) ||
+                this.bustypelist.Text == "Tất cả" || this.tuyenlist.Text == "Tất cả")
             {
                 return false;
             }
@@ -87,6 +86,8 @@ namespace BusManagement.Pages
             this.SoXe.Value = "";
             this.SoChoNgoi.Value = "";
             this.TrangThai.Value = "";
+            this.bustypelist.SelectedIndex = 0;
+            this.tuyenlist.SelectedIndex = 0;
         }
 
         private void LoadEditButton()
@@ -108,7 +109,8 @@ namespace BusManagement.Pages
                     this.bustypelist.SelectedValue = busType.BusTypeID.ToString();
                     this.tuyenlist.Text = bus.RoutesID.ToString();
                     pivot = int.Parse(Request.QueryString["page"]);
-                    LoadListBusPage(pivot);
+                    //LoadListBusPage(0);
+                    LoadListBusPage(pivot,false);
                 }
             }
             catch { }
@@ -120,7 +122,9 @@ namespace BusManagement.Pages
             {
                 ShowAlert("swal('Warning!','Bạn không được để trống các ô !!!','warning')");
             }
-            else if (HRFunctions.Instance.FindBusByBienSoXe(this.BienSoXe.Value) == null)
+            else if (HRFunctions.Instance.FindBusByBienSoXe(this.BienSoXe.Value) == null ||
+                HRFunctions.Instance.FindBusByID(int.Parse(this.BusID.Value)).LicensePlates == this.BienSoXe.Value
+                )
             {
                 if (string.IsNullOrWhiteSpace(this.BusID.Value))
                 {
@@ -156,12 +160,14 @@ namespace BusManagement.Pages
                     ClearInput();
                 }
             }
-				else
-				{
-                ShowAlert("swal('Error!','Biển số xe đã tồn tại!','error')");
+            else
+            {
+                ShowAlert($"swal('Error!','Biển số xe {this.BienSoXe.Value} đã tồn tại!','error')");
+                this.BienSoXe.Value = "";
+                //LoadListBusPage(0);
             }
-            LoadListBusPage(pivot);
-            LoadDropDownList();
+            //LoadDropDownList();
+            LoadListBusPage(pivot,false);
         }
 
         private void ShowAlert(string note)
@@ -175,9 +181,11 @@ namespace BusManagement.Pages
             this.bustypelist.DataTextField = "Name";
             this.bustypelist.DataValueField = "BusTypeID";
             this.bustypelist.DataBind();
+            this.bustypelist.Items.Insert(0, "Tất cả");
 
             this.tuyenlist.DataSource = list;
             this.tuyenlist.DataBind();
+            this.tuyenlist.Items.Insert(0, "Tất cả");
 
             //this.BusList.DataSource = HRFunctions.Instance.SelectAllBus();
             //this.BusList.DataTextField = "BusID";
@@ -208,7 +216,7 @@ namespace BusManagement.Pages
                     bt.Attributes.Add("runat", "server");
                     bt.Click += new EventHandler(this.btPhanTrang_Click);
                     bt.CssClass = "btn btn-custome";
-                    
+
                     this.pnButton.Controls.Add(bt);
                 }
 
@@ -240,10 +248,17 @@ namespace BusManagement.Pages
             LoadListBusPage(PageIndex);
         }
 
-        private void LoadListBusPage(int pIndex)
+        private void LoadListBusPage(int pIndex, bool isSearch=true)
         {
+            string query = "";
+            if (isSearch == true)
+            {
+                query = SearchByCriteria();
+            }
             int TotalRows = 0;
-            this.listBus = HRFunctions.Instance.Bus_Pagination(PageSize, pIndex, out TotalRows);
+
+            this.listBus = HRFunctions.Instance.SearchBusByCriteria(query, PageSize, pIndex, out TotalRows);
+
             this.hTotalRows.Value = TotalRows.ToString();
             if (listBus == null || listBus.Count == 0)
             {
@@ -252,6 +267,7 @@ namespace BusManagement.Pages
             else
             {
                 this.pnPhanTrang.Visible = true;
+                LoadPhanTrang();
             }
         }
 
@@ -266,8 +282,43 @@ namespace BusManagement.Pages
             }
             LoadListBusPage(0);
             LoadDropDownList();
-            LoadPhanTrang();
+            //LoadPhanTrang();
             ClearInput();
+        }
+
+        protected string SearchByCriteria()
+        {
+            string licensePlate = !BienSoXe.Value.IsNullOrWhiteSpace() ? $"LicensePlates='{BienSoXe.Value}' and " : "";
+            string busNumber = !SoXe.Value.IsNullOrWhiteSpace() ? $"BusNumber='{SoXe.Value}' and " : "";
+            string sumSeats = !SoChoNgoi.Value.IsNullOrWhiteSpace() ? $"SumSeats='{SoChoNgoi.Value}' and " : "";
+            string status = !TrangThai.Value.IsNullOrWhiteSpace() ? $"Status=N'{TrangThai.Value}' and " : "";
+            string busType = bustypelist.Text != "Tất cả" ? $"BusTypeID={int.Parse(this.bustypelist.Text)} and " : "";
+            string routes = tuyenlist.Text != "Tất cả" ? $"RoutesID={tuyenlist.Text} and " : "";
+
+            string multiQuery = $"{licensePlate + busNumber + sumSeats + busType + status + routes}";
+            if (multiQuery != "")
+            {
+                int lastPs = multiQuery.LastIndexOf("and");
+                multiQuery = multiQuery.Substring(0, lastPs);
+                multiQuery = "where " + multiQuery;
+            }
+            return multiQuery;
+        }
+
+        protected void Search_Click(object sender, EventArgs e)
+        {
+            LoadListBusPage(0);
+        }
+
+        protected void Clear_Click(object sender, EventArgs e)
+        {
+            ClearInput();
+            LoadListBusPage(0);
+        }
+
+        public string Get_BusTypeName(int id)
+        {
+            return HRFunctions.Instance.GetBusTypeByID(id).Name;
         }
     }
 }

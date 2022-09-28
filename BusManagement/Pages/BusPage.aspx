@@ -121,14 +121,20 @@
         </div>
     </div>
 
-    <div>
-        <asp:Button ID="AddBusButton" runat="server" OnClick="AddBusButton_Click" Text="Thêm Mới" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" OnClientClick="" />
-        <asp:Button ID="UpdateBusButton" runat="server" href="?page=<%=this.pivot%>" OnClick="UpdateBusButton_Click" Text="Cập Nhật" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
-        <asp:Button ID="DeleteBusButton" runat="server" OnClick="DeleteBusButton_CLick" Text="Xóa" BackColor="#ff1a1a" OnClientClick="return confirm('Bạn có muốn xóa không?')" BorderColor="#ff1a1a" CssClass="btn btn-primary" />
+    <div class="row">
+        <div class="col">
+            <asp:Button ID="AddBusButton" runat="server" OnClick="AddBusButton_Click" Text="Thêm Mới" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" OnClientClick="" />
+            <asp:Button ID="UpdateBusButton" runat="server" href="?page=<%=this.pivot%>" OnClick="UpdateBusButton_Click" Text="Cập Nhật" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
+            <asp:Button ID="Button1" runat="server" OnClick="DeleteBusButton_CLick" Text="Xóa" BackColor="#ff1a1a" OnClientClick="return confirm('Bạn có muốn xóa không?')" BorderColor="#ff1a1a" CssClass="btn btn-primary" />
+        </div>
+        <div class="col d-flex justify-content-end">
+            <asp:Button ID="Clear" runat="server" OnClick="Clear_Click" Text="Mặc định" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary me-2" />
+            <asp:Button ID="Search" runat="server" href="?page=<%=this.pivot%>" OnClick="Search_Click" Text="Tìm kiếm" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
+        </div>
     </div>
 
     <div class="mt-3">
-        <h5>Danh sách xe buýt</h5>
+        <h5>Danh sách xe buýt:</h5>
         <table class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
@@ -154,7 +160,7 @@
                     <td class="text-center"><%= bus.BusNumber %></td>
                     <td class="text-center"><%= bus.SumSeats %></td>
                     <td class="text-center"><%= bus.Status %></td>
-                    <td class="text-center"><%= bus.BusTypeID %></td>
+                    <td class="text-center"><%= this.Get_BusTypeName(bus.BusTypeID) %></td>
                     <td class="text-center"><%= bus.RoutesID %></td>
                     <td class="text-center">
                         <a href="?idEdit=<%=bus.BusID %>&page=<%=this.pivot%>">Sửa</a>
@@ -181,6 +187,7 @@
                 </div>
             </asp:Panel>
         </div>
+        <%--<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>--%>
     </div>
 
     <script>

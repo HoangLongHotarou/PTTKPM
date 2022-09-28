@@ -195,6 +195,24 @@ namespace BusinessLayer
                 }
             }
         }
+
+        public List<BusType> Bus_Type_Find_By_Criteria(string MultiColumn, int pageIndex, int pageSize, out int total)
+        {
+            List<BusType> busTypeList = new List<BusType>();
+            total = 0;
+            using (var context = GetContext())
+            {
+                MultiColumn = MultiColumn.ToLower();
+                string sql = $"Select * From BusType {MultiColumn}";
+                var ls = context.BusTypes.SqlQuery(sql);
+                if (ls != null && ls.Any())
+                {
+                    busTypeList = ls.OrderByDescending(s => s.BusTypeID).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                    total = busTypeList.Count();
+                }
+                return busTypeList;
+            }
+        }
         #endregion
     }
 }

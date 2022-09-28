@@ -20,15 +20,25 @@ namespace BusinessLayer
             }
         }
 
+        public BusType GetBusTypeByID(int id)
+        {
+            return BusTypeExt.Instance.BusType_Select_BusTypeID(id);
+        }
+
         public List<Bus> SelectAllBus()
         {
             //Ghi loc, kiem tra quyen, kiem du lieu co hop le khong?
             return BusExt.Instance.Bus_Select_All();
         }
 
-        public List<Bus> SearchBusByCriteria(string multiColumn)
+        public List<Bus> SearchBusByCriteria(string multiColumn,int pageSize, int pageIndex, out int total)
         {
-            return BusExt.Instance.Bus_Find_By_Criteria(multiColumn);
+            return BusExt.Instance.Bus_Find_By_Criteria(multiColumn,pageSize, pageIndex, out total);
+        }
+
+        public List<BusType> SearchBusTypeByCrieria(string multiColumn, int pageSize, int pageIndex, out int total)
+        {
+            return BusTypeExt.Instance.Bus_Type_Find_By_Criteria(multiColumn, pageIndex, pageSize, out total);
         }
 
         public List<BusType> SelectAllBusType()

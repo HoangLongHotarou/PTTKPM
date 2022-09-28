@@ -210,15 +210,21 @@ namespace BusinessLayer
             }
         }
 
-        public List<Bus> Bus_Find_By_Criteria(string MultiColumn)
+        public List<Bus> Bus_Find_By_Criteria(string MultiColumn, int pageSize, int pageIndex, out int total)
         {
+            List<Bus> busList = new List<Bus>();
+            total = 0;
             using (var context = GetContext())
             {
-                MultiColumn = MultiColumn.ToLower();
-                string sql = $"Select * From Bus Where {MultiColumn}";
+                //MultiColumn = MultiColumn.ToLower();
+                string sql = $"Select * From Bus {MultiColumn}";
                 var ls = context.Buses.SqlQuery(sql);
-                if (ls != null && ls.Any()) return ls.ToList<Bus>();
-                return new List<Bus>();
+                if (ls != null && ls.Any())
+                {
+                    total = ls.Count();
+                    busList = ls.OrderByDescending(s => s.BusID).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                }
+                return busList;
             }
         }
     }
