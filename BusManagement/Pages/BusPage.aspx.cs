@@ -15,7 +15,7 @@ namespace BusManagement.Pages
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        List<int> list = new List<int> { 1, 2, 3, 4, 5 };
+        //List<int> list = new List<int> { 1, 2, 3, 4, 5 };
         int PageSize = Global.g_PageSize;
         public int pivot = 0;
         //int PageSize = 2;
@@ -183,7 +183,9 @@ namespace BusManagement.Pages
             this.bustypelist.DataBind();
             this.bustypelist.Items.Insert(0, "Tất cả");
 
-            this.tuyenlist.DataSource = list;
+            this.tuyenlist.DataSource = HRFunctions.Instance.SelectAllBusRoutes();
+            this.tuyenlist.DataTextField = "RouteName";
+            this.tuyenlist.DataValueField = "BusRouteID";
             this.tuyenlist.DataBind();
             this.tuyenlist.Items.Insert(0, "Tất cả");
 
@@ -319,6 +321,11 @@ namespace BusManagement.Pages
         public string Get_BusTypeName(int id)
         {
             return HRFunctions.Instance.GetBusTypeByID(id).Name;
+        }
+
+        public string Get_BusRouteName(int id)
+        {
+            return HRFunctions.Instance.GetBusRouteByID(id).RouteName;
         }
     }
 }

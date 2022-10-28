@@ -25,10 +25,21 @@ namespace BusinessLayer
             return BusTypeExt.Instance.BusType_Select_BusTypeID(id);
         }
 
+        public BusRoute GetBusRouteByID(int id)
+        {
+            return BusExt.Instance.BusRoute_Select_ID(id);
+        }
+
         public List<Bus> SelectAllBus()
         {
             //Ghi loc, kiem tra quyen, kiem du lieu co hop le khong?
             return BusExt.Instance.Bus_Select_All();
+        }
+
+        public List<BusRoute> SelectAllBusRoutes()
+        {
+            //Ghi loc, kiem tra quyen, kiem du lieu co hop le khong?
+            return BusExt.Instance.BusRoute_Select_All();
         }
 
         public List<Bus> SearchBusByCriteria(string multiColumn,int pageSize, int pageIndex, out int total)
@@ -123,5 +134,7 @@ namespace BusinessLayer
         {
             return BusTypeExt.Instance.BusType_Select_BusTypeName(bustypename, carmarker);
         }
+
+
     }
 }

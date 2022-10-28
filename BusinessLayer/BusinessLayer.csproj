@@ -56,6 +56,9 @@
     <Compile Include="DBAccess\Bus.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBAccess\BusRoute.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBAccess\BusType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

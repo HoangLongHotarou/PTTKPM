@@ -161,7 +161,7 @@
                     <td class="text-center"><%= bus.SumSeats %></td>
                     <td class="text-center"><%= bus.Status %></td>
                     <td class="text-center"><%= this.Get_BusTypeName(bus.BusTypeID) %></td>
-                    <td class="text-center"><%= bus.RoutesID %></td>
+                    <td class="text-center"><%= this.Get_BusRouteName(bus.RoutesID) %></td>
                     <td class="text-center">
                         <a href="?idEdit=<%=bus.BusID %>&page=<%=this.pivot%>">Sửa</a>
                     </td>

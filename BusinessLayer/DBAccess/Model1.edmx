@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ROUTE_MANAGEMENTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ROUTE_MANAGEMENTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bus">
           <Key>
             <PropertyRef Name="BusID" />
@@ -16,6 +16,21 @@
           <Property Name="Status" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="BusTypeID" Type="int" Nullable="false" />
           <Property Name="RoutesID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusRoutes">
+          <Key>
+            <PropertyRef Name="BusRouteID" />
+          </Key>
+          <Property Name="BusRouteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RouteNumber" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="RouteName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ResponsibleUnitID" Type="int" Nullable="false" />
+          <Property Name="OperationType" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="OperationTime" Type="datetime" Nullable="false" />
+          <Property Name="Fare" Type="int" Nullable="false" />
+          <Property Name="BusesAmount" Type="int" Nullable="false" />
+          <Property Name="BusesTime" Type="datetime" Nullable="false" />
+          <Property Name="BusesSpace" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="BusType">
           <Key>
@@ -36,11 +51,11 @@
         </EntityType>
         <EntityContainer Name="ROUTE_MANAGEMENTModelStoreContainer">
           <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusRoutes" EntityType="Self.BusRoutes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BusType" EntityType="Self.BusType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver_Bus" EntityType="Self.Driver_Bus" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ROUTE_MANAGEMENTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -77,7 +92,23 @@
           <EntitySet Name="Buses" EntityType="Self.Bus" />
           <EntitySet Name="BusTypes" EntityType="Self.BusType" />
           <EntitySet Name="Driver_Bus" EntityType="Self.Driver_Bus" />
+          <EntitySet Name="BusRoutes" EntityType="ROUTE_MANAGEMENTModel.BusRoute" />
         </EntityContainer>
+        <EntityType Name="BusRoute">
+          <Key>
+            <PropertyRef Name="BusRouteID" />
+          </Key>
+          <Property Name="BusRouteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RouteNumber" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RouteName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibleUnitID" Type="Int32" Nullable="false" />
+          <Property Name="OperationType" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OperationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fare" Type="Int32" Nullable="false" />
+          <Property Name="BusesAmount" Type="Int32" Nullable="false" />
+          <Property Name="BusesTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BusesSpace" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -113,6 +144,22 @@
                 <ScalarProperty Name="DriverID" ColumnName="DriverID" />
                 <ScalarProperty Name="BusID" ColumnName="BusID" />
                 <ScalarProperty Name="DepartureDay" ColumnName="DepartureDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusRoutes">
+            <EntityTypeMapping TypeName="ROUTE_MANAGEMENTModel.BusRoute">
+              <MappingFragment StoreEntitySet="BusRoutes">
+                <ScalarProperty Name="BusesSpace" ColumnName="BusesSpace" />
+                <ScalarProperty Name="BusesTime" ColumnName="BusesTime" />
+                <ScalarProperty Name="BusesAmount" ColumnName="BusesAmount" />
+                <ScalarProperty Name="Fare" ColumnName="Fare" />
+                <ScalarProperty Name="OperationTime" ColumnName="OperationTime" />
+                <ScalarProperty Name="OperationType" ColumnName="OperationType" />
+                <ScalarProperty Name="ResponsibleUnitID" ColumnName="ResponsibleUnitID" />
+                <ScalarProperty Name="RouteName" ColumnName="RouteName" />
+                <ScalarProperty Name="RouteNumber" ColumnName="RouteNumber" />
+                <ScalarProperty Name="BusRouteID" ColumnName="BusRouteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -34,6 +34,14 @@ namespace BusinessLayer
             }
         }
 
+        public BusRoute BusRoute_Select_ID(int id)
+        {
+            using (var db = GetContext())
+            {
+                return db.BusRoutes.FirstOrDefault(s => s.BusRouteID == id);
+            }
+        }
+
         public Bus Bus_Select_BienSoXe(string biensoxe)
         {
             using (var db = GetContext())
@@ -225,6 +233,17 @@ namespace BusinessLayer
                     busList = ls.OrderByDescending(s => s.BusID).Skip(pageIndex * pageSize).Take(pageSize).ToList();
                 }
                 return busList;
+            }
+        }
+
+        public List<BusRoute> BusRoute_Select_All()
+        {
+            using (var db = new ROUTE_MANAGEMENTEntities())
+            {
+                var ls = db.BusRoutes.AsQueryable();
+                if (ls != null && ls.Any())
+                    return ls.ToList();
+                return new List<BusRoute>();
             }
         }
     }
