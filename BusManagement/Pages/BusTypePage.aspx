@@ -21,7 +21,7 @@
     <div class="d-flex justify-content-end">
         <asp:Button ID="AddBusButton" OnClick="Insert_Click" runat="server" Text="Thêm Mới" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
         <asp:Button ID="UpdateBusButton" href="?page=<%=this.pivot%>" OnClick="Update_Click" runat="server" Text="Cập Nhật" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary ms-2" />
-        <asp:Button ID="DeleteBusButton" OnClientClick="return confirm('Bạn có muốn xóa không?')" OnClick="Delete_Click" runat="server" Text="Xóa" BackColor="#ff1a1a" BorderColor="#ff1a1a" CssClass="btn btn-primary ms-2" />
+        <asp:Button ID="DeleteBusButton" OnClientClick="return confirm('Nếu bạn xóa loại xe thì các xe thuộc loại xe đó cũng sẽ bị xóa\nBạn có muốn xóa không?')" OnClick="Delete_Click" runat="server" Text="Xóa" BackColor="#ff1a1a" BorderColor="#ff1a1a" CssClass="btn btn-primary ms-2" />
     </div>
 
     <div class="mt-3">

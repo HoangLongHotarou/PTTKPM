@@ -48,17 +48,16 @@
         </div>
     </div>
 
-    <div>
-        <asp:Button ID="SearchButton" runat="server" OnClick="Search" Text="Tìm kiếm" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
+    <div class="row">
+        <div class="col d-flex justify-content-end">
+            <asp:Button ID="Search" runat="server" href="?page=<%=this.pivot%>" OnClick="Search_Click" Text="Tìm kiếm" BackColor="#339933" BorderColor="#339933" CssClass="btn btn-primary" />
+        </div>
     </div>
-    <% if (listResult != null)
-    { %>
-    <div class="mt-3">
-        <h5>Danh sách xe buýt</h5>
+        <div class="mt-3">
+        <h5>Danh sách xe buýt:</h5>
         <table class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
-                    <th class="text-center" scope="col">ID</th>
                     <th class="text-center" scope="col">Biến Số Xe</th>
                     <th class="text-center" scope="col">Số Của Xe</th>
                     <th class="text-center" scope="col">Số Chỗ Ngồi</th>
@@ -68,20 +67,37 @@
                 </tr>
             </thead>
             <tbody>
-                <% foreach (var bus in listResult)
+                <% foreach (var bus in listBus)
                     { %>
                 <tr>
-                    <th class="text-center" scope="row"><%= bus.BusID %></th>
                     <td class="text-center"><%= bus.LicensePlates %></td>
                     <td class="text-center"><%= bus.BusNumber %></td>
                     <td class="text-center"><%= bus.SumSeats %></td>
                     <td class="text-center"><%= bus.Status %></td>
-                    <td class="text-center"><%= bus.BusTypeID %></td>
-                    <td class="text-center"><%= bus.RoutesID %></td>
+                    <td class="text-center"><%= this.Get_BusTypeName(bus.BusTypeID) %></td>
+                    <td class="text-center"><%= this.Get_BusRouteName(bus.RoutesID) %></td>
                 </tr>
                 <% } %>
             </tbody>
         </table>
+        <div class="card-footer text-right">
+            <asp:Panel ID="pnPhanTrang" runat="server">
+                <div class="row">
+                    <div class="col-auto">
+                        <asp:Button ID="btTruoc" runat="server" Text="Trước" BackColor="#339933" BorderColor="#339933" class="btn btn-primary" href="?page=<%=this.pivot%>" OnClick="btPhanTrang_Click" />
+                    </div>
+                    <div class="col-auto">
+                        <asp:HiddenField ID="hPageIndex" runat="server" />
+                        <asp:HiddenField ID="hTotalRows" runat="server" />
+                        <asp:HiddenField ID="hPageSize" runat="server" />
+                        <asp:Panel ID="pnButton" runat="server"></asp:Panel>
+                    </div>
+                    <div class="col-auto">
+                        <asp:Button ID="btSau" runat="server" Text="Sau" BackColor="#339933" BorderColor="#339933" class="btn btn-primary" href="?page=<%=this.pivot%>" OnClick="btPhanTrang_Click" />
+                    </div>
+                </div>
+            </asp:Panel>
+        </div>
+        <%--<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>--%>
     </div>
-    <% } %>
 </asp:Content>

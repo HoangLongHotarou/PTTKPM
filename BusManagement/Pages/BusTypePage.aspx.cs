@@ -126,6 +126,7 @@ namespace BusManagement.Pages
             {
                 List<string> list = selected.Split(',').ToList();
                 HRFunctions.Instance.DeleteBusTypeIDs(list);
+                HRFunctions.Instance.DeleteBusBusTypeIDs(list);
                 ShowAlert("swal('Success!','Xóa loại xe thành công!','success')");
             }
             LoadListBusTypePage(0);

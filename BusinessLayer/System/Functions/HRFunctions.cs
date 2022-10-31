@@ -101,6 +101,11 @@ namespace BusinessLayer
             BusTypeExt.Instance.BusType_Delete_BusTypeIDs(ids);
         }
 
+        public void DeleteBusBusTypeIDs(List<string> ids)
+		  {
+            BusExt.Instance.Bus_Delete_BusTypeIDs(ids);
+		  }
+
         public void DeleteBusByID(int id)
         {
             BusExt.Instance.Bus_Delete(id);

@@ -132,6 +132,22 @@ namespace BusinessLayer
                 }
             }
         }
+
+        public void Bus_Delete_BusTypeIDs(List<string> IDs)
+        {
+            using (var db = GetContext())
+            {
+                var ls = db.Buses.AsQueryable();
+                if (ls != null && ls.Any())
+                {
+                    ls = ls.Where(s => IDs.Contains(s.BusTypeID.ToString()));
+                    foreach (var item in ls)
+                        db.Buses.Remove(item);
+                    db.SaveChanges();
+                }
+            }
+        }
+
         public List<Bus> Bus_Find_KeyWord(string Keyword, int PageSize, int PageIndex, out int TotalRows)
         {
             TotalRows = 0;
