@@ -140,7 +140,7 @@
                 <tr>
                     <th class="text-center" scope="col">
                         <input id="selectAll" type="checkbox"><label for='selectAll'></label></th>
-                    <th class="text-center" scope="col">ID</th>
+                    <%--<th class="text-center" scope="col">ID</th>--%>
                     <th class="text-center" scope="col">Biến Số Xe</th>
                     <th class="text-center" scope="col">Số Của Xe</th>
                     <th class="text-center" scope="col">Số Chỗ Ngồi</th>
@@ -155,7 +155,7 @@
                 <tr>
                     <td style="width: 40px; text-align: center">
                         <input name='cbID' value='<%=bus.BusID %>' type='checkbox' /></td>
-                    <th class="text-center" scope="row"><%= bus.BusID %></th>
+                    <%--<th class="text-center" scope="row"><%= bus.BusID %></th>--%>
                     <td class="text-center"><%= bus.LicensePlates %></td>
                     <td class="text-center"><%= bus.BusNumber %></td>
                     <td class="text-center"><%= bus.SumSeats %></td>

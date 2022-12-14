@@ -44,7 +44,16 @@ namespace BusManagement.Pages
                 //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Bạn không được để trống các ô')", true);
                 ShowAlert("swal('Warning!','Bạn không được để trống các ô !!!','warning')");
             }
-            else if (HRFunctions.Instance.FindBusByBienSoXe(this.BienSoXe.Value) == null)
+            else if (HRFunctions.Instance.FindBusByBienSoXe(this.BienSoXe.Value) != null)
+            {
+                ShowAlert("swal('Error!','Biển số xe đã tồn tại!','error')");
+            }
+            else if (HRFunctions.Instance.FindBusByBusNumber(this.SoXe.Value) != null)
+            {
+                ShowAlert("swal('Error!','Số của xe đã tồn tại!','error')");
+
+            }
+            else
             {
                 Bus bus = new Bus
                 {
@@ -58,13 +67,11 @@ namespace BusManagement.Pages
                 HRFunctions.Instance.AddBus(bus);
                 ShowAlert("swal('Success!','Thêm xe thành công!','success')");
                 ClearInput();
+                LoadDropDownList();
+
             }
-            else
-            {
-                ShowAlert("swal('Error!','Biển số xe đã tồn tại!','error')");
-            }
-            LoadListBusPage(0,false);
-            LoadDropDownList();
+
+            LoadListBusPage(0, false);
         }
 
 
@@ -132,32 +139,42 @@ namespace BusManagement.Pages
                 }
                 else
                 {
-                    Bus bus = HRFunctions.Instance.FindBusByID(int.Parse(this.BusID.Value));
-
-                    bus.LicensePlates = this.BienSoXe.Value;
-                    bus.BusNumber = this.SoXe.Value;
-                    bus.SumSeats = int.Parse(this.SoChoNgoi.Value);
-                    bus.Status = this.TrangThai.Value;
-                    bus.BusTypeID = int.Parse(this.bustypelist.Text);
-                    bus.RoutesID = int.Parse(this.tuyenlist.Text);
-
-                    HRFunctions.Instance.AddBus(bus);
-                    ShowAlert("swal('Success!','Cập nhật xe thành công!','success')");
-
-                    try
+                    if (HRFunctions.Instance.FindBusByBusNumber(this.SoXe.Value) == null)
                     {
-                        pivot = int.Parse(Request.QueryString["page"]);
+                        Bus bus = HRFunctions.Instance.FindBusByID(int.Parse(this.BusID.Value));
+
+                        bus.LicensePlates = this.BienSoXe.Value;
+                        bus.BusNumber = this.SoXe.Value;
+                        bus.SumSeats = int.Parse(this.SoChoNgoi.Value);
+                        bus.Status = this.TrangThai.Value;
+                        bus.BusTypeID = int.Parse(this.bustypelist.Text);
+                        bus.RoutesID = int.Parse(this.tuyenlist.Text);
+
+                        HRFunctions.Instance.AddBus(bus);
+                        ShowAlert("swal('Success!','Cập nhật xe thành công!','success')");
+
+                        try
+                        {
+                            pivot = int.Parse(Request.QueryString["page"]);
+                        }
+                        catch
+                        {
+                            pivot = 0;
+                        }
+
+                        //Them do
+                        PropertyInfo isreadonly = typeof(System.Collections.Specialized.NameValueCollection).GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
+                        isreadonly.SetValue(this.Request.QueryString, false, null);
+                        Request.QueryString.Clear();
+                        ClearInput();
                     }
-                    catch
+                    else
                     {
-                        pivot = 0;
+                        Console.WriteLine("loi");
+                        ShowAlert("swal('Error!','Số của xe đã tồn tại,'error')");
                     }
 
-                    //Them do
-                    PropertyInfo isreadonly = typeof(System.Collections.Specialized.NameValueCollection).GetProperty("IsReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
-                    isreadonly.SetValue(this.Request.QueryString, false, null);
-                    Request.QueryString.Clear();
-                    ClearInput();
+                    
                 }
             }
             else
@@ -182,12 +199,14 @@ namespace BusManagement.Pages
             this.bustypelist.DataValueField = "BusTypeID";
             this.bustypelist.DataBind();
             this.bustypelist.Items.Insert(0, "Tất cả");
+            this.bustypelist.SelectedIndex = 0;
 
             this.tuyenlist.DataSource = HRFunctions.Instance.SelectAllBusRoutes();
             this.tuyenlist.DataTextField = "RouteName";
             this.tuyenlist.DataValueField = "BusRouteID";
             this.tuyenlist.DataBind();
             this.tuyenlist.Items.Insert(0, "Tất cả");
+            this.tuyenlist.SelectedIndex = 0;
 
             //this.BusList.DataSource = HRFunctions.Instance.SelectAllBus();
             //this.BusList.DataTextField = "BusID";

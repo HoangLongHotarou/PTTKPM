@@ -31,7 +31,7 @@
                 <tr>
                     <th class="text-center" scope="col">
                         <input id="selectAll" type="checkbox"><label for='selectAll'></label></th>
-                    <th class="text-center" scope="col">ID</th>
+                    <%--<th class="text-center" scope="col">ID</th>--%>
                     <th class="text-center" scope="col">Tên Loại</th>
                     <th class="text-center" scope="col">Hãng xe</th>
                 </tr>
@@ -42,7 +42,7 @@
                 <tr>
                     <td style="width: 40px; text-align: center">
                         <input name='cbID' value='<%=busType.BusTypeID %>' type='checkbox' /></td>
-                    <td class="text-center"><%= busType.BusTypeID %></td>
+                    <%--<td class="text-center"><%= busType.BusTypeID %></td>--%>
                     <td class="text-center"><%= busType.Name %></td>
                     <td class="text-center"><%= busType.CarMaker %></td>
                     <td class="text-center">

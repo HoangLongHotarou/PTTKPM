@@ -140,6 +140,10 @@ namespace BusinessLayer
             return BusTypeExt.Instance.BusType_Select_BusTypeName(bustypename, carmarker);
         }
 
+        public Bus FindBusByBusNumber(string busnumber)
+		  {
+            return BusExt.Instance.Bus_Select_BusNumber(busnumber);
+		  }
 
     }
 }

@@ -262,5 +262,13 @@ namespace BusinessLayer
                 return new List<BusRoute>();
             }
         }
+
+        public Bus Bus_Select_BusNumber(string busnumber)
+        {
+            using (var db = GetContext())
+            {
+                return db.Buses.FirstOrDefault(s => s.BusNumber == busnumber);
+            }
+        }
     }
 }
